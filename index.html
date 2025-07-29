@@ -247,6 +247,19 @@
             const handleFormSubmit = async (e) => {
                 e.preventDefault();
                 if (/^0\d{9}$/.test(formData.phone)) {
+                    // Track successful purchase
+                    let value = 199000;
+                    if (formData.treatment === '2_hop') value = 320000;
+                    if (formData.treatment === '4_hop') value = 600000;
+                    
+                    fbq('track', 'Purchase', {
+                        value: value,
+                        currency: 'VND',
+                        content_name: 'Cao Ban Long Hà Thảo Mộc',
+                        content_type: 'product',
+                        content_ids: ['CBL' + formData.treatment],
+                        num_items: formData.treatment === '4_hop' ? 4 : (formData.treatment === '2_hop' ? 2 : 1)
+                    });
                     try {
                         // Replace this URL with your Google Apps Script Web App URL
                         const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL';
@@ -372,10 +385,12 @@
                                     <h1 className="text-2xl font-bold text-gray-800">Sản phẩm CAO BAN LONG HÀ THẢO MỘC GIA TRUYỀN</h1>
                                     <div className="mt-4 bg-orange-50 p-4 rounded-lg">
                                         <div className="flex flex-wrap items-center gap-2 mb-2">
-                                            <div className="flex items-baseline gap-2 flex-wrap">
-                                                <span className="text-2xl md:text-3xl font-bold text-red-600 leading-none">199.000₫</span>
-                                                <span className="text-gray-500 line-through text-sm md:text-base">550.000₫</span>
-                                                <span className="text-red-600 text-xs md:text-sm font-semibold border border-red-600 rounded px-2 py-0.5 inline-block">-64%</span>
+                                            <div className="flex items-baseline gap-2 flex-wrap w-full">
+                                                <div className="flex items-baseline gap-2 flex-wrap">
+                                                    <span className="text-2xl md:text-3xl font-bold text-red-600 leading-none order-1">199.000₫</span>
+                                                    <span className="text-gray-500 line-through text-sm md:text-base order-2">550.000₫</span>
+                                                    <span className="text-red-600 text-xs md:text-sm font-semibold border border-red-600 rounded px-2 py-0.5 inline-block bg-red-50 order-3">-64%</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="flex flex-wrap items-center gap-2 md:gap-4">
@@ -390,10 +405,10 @@
                                     </div>
                                     <button
                                         onClick={handleOrderClick}
-                                        className="mt-6 bg-red-600 hover:bg-red-500 active:scale-95 active:bg-red-700 transform transition-all duration-150 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg w-full md:w-auto flex items-center justify-center gap-2"
+                                        className="mt-6 bg-red-600 hover:bg-red-500 active:scale-95 active:bg-red-700 transform transition-all duration-150 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg w-full flex items-center justify-center gap-2 animate-pulse"
                                     >
                                         <i className="fas fa-shopping-cart"></i>
-                                        MUA NGAY
+                                        MUA NGAY - GIẢM GIÁ 64%
                                     </button>
                                     <div className="mt-6">
                                         <h2 className="text-red-600 font-bold italic text-xl">ĐIỀU TRỊ DỨT ĐIỂM CÁC TÌNH TRẠNG:</h2>
@@ -760,10 +775,10 @@
                                     </div>
                                     <button
                                         type="submit"
-                                        className="w-full bg-red-600 hover:bg-red-500 active:scale-95 active:bg-red-700 transform transition-all duration-150 text-white p-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2"
+                                        className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 active:scale-95 transform transition-all duration-150 text-white p-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 shadow-lg animate-pulse"
                                     >
                                         <i className="fas fa-shopping-cart"></i>
-                                        ĐẶT MUA NGAY
+                                        ĐẶT MUA NGAY - MIỄN PHÍ VẬN CHUYỂN
                                     </button>
                                 </form>
                             </div>
