@@ -28,6 +28,25 @@
         gtag('config', 'G-XXXXXXXXXX');
     </script>
 
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '763747612790246');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=763747612790246&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+
     <!-- Schema.org markup for Google -->
     <script type="application/ld+json">
     {
@@ -171,6 +190,18 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            // Track purchase event
+            fbq('track', 'Purchase', {
+                value: formData.treatment === '1_hop' ? 199000 : 
+                       formData.treatment === '2_hop' ? 320000 : 600000,
+                currency: 'VND'
+            });
+            // Show success popup
+            setShowSuccessPopup(true);
+        }
+
         function App() {
             const [showSuccessPopup, setShowSuccessPopup] = React.useState(false);
             const [showOrderPopup, setShowOrderPopup] = React.useState(false);
@@ -698,12 +729,30 @@
                     </section>
 
                     {/* Zalo Button */}
-                    <a href="https://zalo.me/0329169998" className="fixed right-4 bottom-20 text-white z-50 transition-all duration-300 hover:scale-110">
+                    <a 
+                        href="https://zalo.me/0329169998" 
+                        className="fixed right-4 bottom-20 text-white z-50 transition-all duration-300 hover:scale-110"
+                        onClick={() => {
+                            fbq('track', 'Contact', {
+                                content_category: 'Zalo',
+                                content_name: 'Zalo Click'
+                            });
+                        }}
+                    >
                         <img src="./images/zalo-icon.png" alt="Zalo" className="w-12 h-12 drop-shadow-lg" />
                     </a>
 
                     {/* Messenger Button */}
-                    <a href="https://m.me/hathaomoc.vn" className="fixed right-4 bottom-4 text-white z-50 transition-all duration-300 hover:scale-110">
+                    <a 
+                        href="https://m.me/hathaomoc.vn" 
+                        className="fixed right-4 bottom-4 text-white z-50 transition-all duration-300 hover:scale-110"
+                        onClick={() => {
+                            fbq('track', 'Contact', {
+                                content_category: 'Messenger',
+                                content_name: 'Messenger Click'
+                            });
+                        }}
+                    >
                         <img src="./images/icons8-messenger-48.png" alt="Messenger" className="w-12 h-12 drop-shadow-lg" />
                     </a>
 
