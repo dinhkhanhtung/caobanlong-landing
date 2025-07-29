@@ -82,6 +82,13 @@
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
     <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --primary-light: #81C784;
+            --accent-color: #4CAF50;
+        }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -329,7 +336,7 @@
             return (
                 <div className="font-sans">
                     {/* Section 1: Header and Product Gallery */}
-                    <section className="bg-gray-100 py-10">
+                    <section className="bg-gradient-to-b from-green-50 to-white py-10">
                         <div className="container mx-auto px-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>
@@ -362,12 +369,30 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h1 className="text-3xl font-bold text-orange-600">Sản phẩm CAO BAN LONG HÀ THẢO MỘC GIA TRUYỀN</h1>
-                                    <p className="text-gray-500 line-through text-xl mt-2">550,000đ</p>
-                                    <p className="text-red-600 font-bold text-2xl">Tiết kiệm tới 34%</p>
-                                    <p className="text-gray-700 text-lg">Đánh giá: 4.9/5 (46.3k lượt đánh giá)</p>
-                                    <p className="text-gray-700 text-lg">Đã bán 87.2K sản phẩm</p>
-                                    <button onClick={handleOrderClick} className="mt-4 bg-red-600 text-white px-6 py-3 rounded-lg pulse text-lg font-bold">ĐẶT HÀNG NGAY</button>
+                                    <h1 className="text-2xl font-bold text-gray-800">Sản phẩm CAO BAN LONG HÀ THẢO MỘC GIA TRUYỀN</h1>
+                                    <div className="mt-4 bg-orange-50 p-4 rounded-lg">
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-3xl font-bold text-red-600">199.000₫</span>
+                                            <span className="text-gray-500 line-through">550.000₫</span>
+                                            <span className="text-red-600 text-sm font-semibold border border-red-600 rounded px-2">-64%</span>
+                                        </div>
+                                        <div className="mt-2 flex items-center gap-4">
+                                            <div className="flex items-center gap-1">
+                                                <span className="text-yellow-400 text-lg">★★★★★</span>
+                                                <span className="text-red-500 font-medium">4.9/5</span>
+                                                <span className="text-gray-500">(46,3K đánh giá)</span>
+                                            </div>
+                                            <div className="h-4 w-[1px] bg-gray-300"></div>
+                                            <div className="text-red-500 font-medium">Đã bán 87,2K</div>
+                                        </div>
+                                    </div>
+                                    <button 
+                                        onClick={handleOrderClick} 
+                                        className="mt-6 bg-red-600 hover:bg-red-500 active:scale-95 active:bg-red-700 transform transition-all duration-150 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg w-full md:w-auto flex items-center justify-center gap-2"
+                                    >
+                                        <i className="fas fa-shopping-cart"></i>
+                                        MUA NGAY
+                                    </button>
                                     <div className="mt-6">
                                         <h2 className="text-red-600 font-bold italic text-xl">ĐIỀU TRỊ DỨT ĐIỂM CÁC TÌNH TRẠNG:</h2>
                                         <ul className="mt-4 space-y-2 text-lg text-gray-800 italic font-semibold">
@@ -479,78 +504,184 @@
                     {/* Section 5: Comments */}
                     <section className="py-10 bg-white">
                         <div className="container mx-auto px-4">
-                            <h2 className="text-2xl font-bold">Tất cả bình luận (17.653)</h2>
-                            <div className="mt-4 flex justify-between">
-                                <p>Sắp xếp theo: Hàng đầu <i className="fas fa-chevron-down ml-2"></i></p>
-                                <button onClick={handleOrderClick} className="bg-red-600 text-white px-6 py-3 rounded-lg pulse font-bold">ĐẶT HÀNG NGAY</button>
-                            </div>
-                            <div className="mt-6 space-y-4">
-                                <div className="bg-gray-100 p-4 rounded-lg flex">
-                                    <img src="./images/selected_avatars/customer3.jpg" alt="Mai Hương" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
-                                    <div>
-                                        <p className="font-bold">Mai Hương</p>
-                                        <p>Cao Ban Long Hà Thảo Mộc qc trên mạng k biết có tốt k nên cũng đắn đo, nhưng khi quyết định mua và dùng thử thấy rất hài lòng vì sản phẩm uống có hiệu quả thật, đơn vị tư vấn cũng rất nhiệt tình tận tâm.</p>
-                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 8 lượt thích • 56 phút trước</p>
+                            <div className="max-w-2xl mx-auto">
+                                <div className="flex items-center justify-between border-b border-gray-300 pb-4">
+                                    <h2 className="text-xl font-semibold text-[#050505]">Bình luận</h2>
+                                    <div className="flex items-center gap-2 text-[#65676B] text-sm">
+                                        <span>17.653 bình luận</span>
+                                        <i className="fas fa-cog"></i>
                                     </div>
                                 </div>
-                                <div className="bg-gray-100 p-4 rounded-lg flex">
-                                    <img src="./images/selected_avatars/customer4.jpg" alt="Trịnh Đình Quang" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
-                                    <div>
-                                        <p className="font-bold">Trịnh Đình Quang</p>
-                                        <p>Cao Ban Long Hà Thảo Mộc tôi thấy rất chất lượng, dễ uống mà mau hồi phục, ko mệt mỏi như dùng các sản phẩm khác.</p>
-                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 6 lượt thích • 54 phút trước</p>
+                                <div className="flex items-center gap-2 py-2 text-sm text-[#65676B] border-b border-gray-300">
+                                    <button className="font-semibold">Phù hợp nhất</button>
+                                    <i className="fas fa-chevron-down"></i>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex gap-2">
+                                        <img src="./images/selected_avatars/customer3.jpg" alt="Mai Hương" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                        <div className="flex-1">
+                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                <p className="font-semibold text-[#050505]">Mai Hương</p>
+                                                <p className="text-[#050505]">Cao Ban Long Hà Thảo Mộc qc trên mạng k biết có tốt k nên cũng đắn đo, nhưng khi quyết định mua và dùng thử thấy rất hài lòng vì sản phẩm uống có hiệu quả thật, đơn vị tư vấn cũng rất nhiệt tình tận tâm.</p>
+                                            </div>
+                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                <button className="font-semibold hover:underline">Thích</button>
+                                                <button className="font-semibold hover:underline">Phản hồi</button>
+                                                <span>56 phút</span>
+                                                <div className="flex items-center gap-1">
+                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                    <span>8</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2 ml-12">
+                                        <img src="./images/selected_avatars/customer4.jpg" alt="Trịnh Đình Quang" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                        <div className="flex-1">
+                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                <p className="font-semibold text-[#050505]">Trịnh Đình Quang</p>
+                                                <p className="text-[#050505]">Cao Ban Long Hà Thảo Mộc tôi thấy rất chất lượng, dễ uống mà mau hồi phục, ko mệt mỏi như dùng các sản phẩm khác.</p>
+                                            </div>
+                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                <button className="font-semibold hover:underline">Thích</button>
+                                                <button className="font-semibold hover:underline">Phản hồi</button>
+                                                <span>54 phút</span>
+                                                <div className="flex items-center gap-1">
+                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                    <span>6</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <img src="./images/selected_avatars/customer5.jpg" alt="Chuc Nguyen" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                        <div className="flex-1">
+                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                <p className="font-semibold text-[#050505]">Chuc Nguyen</p>
+                                                <p className="text-[#050505]">Em bị suy nhược cơ thể, gầy yếu, ăn kém, khó chịu, muốn bồi bổ cơ thể mà còn đắn đo. Nhờ chị tư vấn cho em liệu trình Cao Ban Long Hà Thảo Mộc ạ.</p>
+                                            </div>
+                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                <button className="font-semibold hover:underline">Thích</button>
+                                                <button className="font-semibold hover:underline">Phản hồi</button>
+                                                <span>50 phút</span>
+                                                <div className="flex items-center gap-1">
+                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                    <span>2</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <img src="./images/selected_avatars/customer6.jpg" alt="Hien Nguyen" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                        <div className="flex-1">
+                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                <p className="font-semibold text-[#050505]">Hien Nguyen</p>
+                                                <p className="text-[#050505]">Mình bị đau lưng, mỏi gối, thiếu máu, cơ thể hay mệt mỏi. Mới dùng Cao Ban Long Hà Thảo Mộc 3 ngày mà thấy đỡ hẳn, ngủ ngon hơn. Cảm ơn chị nhiều.</p>
+                                            </div>
+                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                <button className="font-semibold hover:underline">Thích</button>
+                                                <button className="font-semibold hover:underline">Phản hồi</button>
+                                                <span>15 phút</span>
+                                                <div className="flex items-center gap-1">
+                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                    <span>2</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-[#65676B] mt-4">
+                                        <div className="w-2 h-2 bg-[#65676B] rounded-full animate-pulse"></div>
+                                        <span className="text-sm">Ai đó đang nhập bình luận...</span>
                                     </div>
                                 </div>
-                                <div className="bg-gray-100 p-4 rounded-lg flex">
-                                    <img src="./images/selected_avatars/customer5.jpg" alt="Chuc Nguyen" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
-                                    <div>
-                                        <p className="font-bold">Chuc Nguyen</p>
-                                        <p>Em bị suy nhược cơ thể, gầy yếu, ăn kém, khó chịu, muốn bồi bổ cơ thể mà còn đắn đo. Nhờ chị tư vấn cho em liệu trình Cao Ban Long Hà Thảo Mộc ạ.</p>
-                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 2 lượt thích • 50 phút trước</p>
-                                    </div>
-                                </div>
-                                <div className="bg-gray-100 p-4 rounded-lg flex">
-                                    <img src="./images/selected_avatars/customer6.jpg" alt="Hien Nguyen" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
-                                    <div>
-                                        <p className="font-bold">Hien Nguyen</p>
-                                        <p>Mình bị đau lưng, mỏi gối, thiếu máu, cơ thể hay mệt mỏi. Mới dùng Cao Ban Long Hà Thảo Mộc 3 ngày mà thấy đỡ hẳn, ngủ ngon hơn. Cảm ơn chị nhiều.</p>
-                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 2 lượt thích • 15 phút trước</p>
-                                    </div>
-                                </div>
-                                <p className="text-gray-600 comment-typing"><i className="fas fa-comment-dots mr-2"></i> Ai đó đang nhập bình luận<span className="typing-indicator">...</span></p>
                             </div>
                         </div>
                     </section>
 
                     {/* Section 6: Footer */}
-                    <section className="bg-gray-800 text-white py-10">
+                    <section className="bg-gray-900 text-gray-300 py-12">
                         <div className="container mx-auto px-4">
-                            <div className="flex flex-col md:flex-row justify-between items-center">
-                                <a href="tel:0969565415" className="bg-red-600 text-white px-6 py-3 rounded-lg flash font-bold mb-4 md:mb-0"><i className="fas fa-phone mr-2"></i> ☎️ 0329 169 998</a>
-                                <button onClick={handleOrderClick} className="bg-red-600 text-white px-6 py-3 rounded-lg pulse font-bold">ĐẶT HÀNG NGAY</button>
-                            </div>
-                            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <p><i className="fas fa-phone mr-2"></i> Hotline: 0329 169 998</p>
-                                    <p><i className="fas fa-envelope mr-2"></i> Email: truongthuyha758111@gmail.com</p>
-                                    <p><i className="fas fa-map-marker-alt mr-2"></i> Address: Nho Quan, Ninh Bình</p>
+                            <div className="max-w-6xl mx-auto">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    <div>
+                                        <h3 className="text-white text-lg font-semibold mb-4">Liên Hệ</h3>
+                                        <ul className="space-y-3">
+                                            <li>
+                                                <a href="tel:0329169998" className="flex items-center gap-2 hover:text-white transition-colors">
+                                                    <i className="fas fa-phone"></i>
+                                                    <span>0329 169 998</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="mailto:truongthuyha758111@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors">
+                                                    <i className="fas fa-envelope"></i>
+                                                    <span>truongthuyha758111@gmail.com</span>
+                                                </a>
+                                            </li>
+                                            <li className="flex items-center gap-2">
+                                                <i className="fas fa-map-marker-alt"></i>
+                                                <span>Nho Quan, Ninh Bình</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 className="text-white text-lg font-semibold mb-4">Thông Tin</h3>
+                                        <ul className="space-y-3">
+                                            <li>
+                                                <a href="/chinh-sach-van-chuyen" className="flex items-center gap-2 hover:text-white transition-colors">
+                                                    <i className="fas fa-truck"></i>
+                                                    <span>Chính sách vận chuyển</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/chinh-sach-doi-tra" className="flex items-center gap-2 hover:text-white transition-colors">
+                                                    <i className="fas fa-undo"></i>
+                                                    <span>Chính sách đổi trả</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/chinh-sach-bao-mat" className="flex items-center gap-2 hover:text-white transition-colors">
+                                                    <i className="fas fa-shield-alt"></i>
+                                                    <span>Chính sách bảo mật</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-white text-lg font-semibold mb-4">Đặt Hàng</h3>
+                                        <div className="space-y-4">
+                                            <button 
+                                                onClick={handleOrderClick}
+                                                className="w-full bg-red-600 hover:bg-red-500 active:scale-95 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                                            >
+                                                <i className="fas fa-shopping-cart"></i>
+                                                Đặt Hàng Ngay
+                                            </button>
+                                            <a 
+                                                href="tel:0329169998" 
+                                                className="w-full bg-green-600 hover:bg-green-500 active:scale-95 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                                            >
+                                                <i className="fas fa-phone"></i>
+                                                Gọi Ngay
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p><i className="fas fa-headset mr-2"></i> CUSTOMER SERVICE</p>
-                                    <p><i className="fas fa-truck mr-2"></i> Returns & Shipping Policy</p>
-                                    <p><i className="fas fa-file-alt mr-2"></i> Terms of Use</p>
-                                    <p><i className="fas fa-user-shield mr-2"></i> Privacy Policy</p>
-                                    <p><i className="fas fa-envelope mr-2"></i> Contact Us</p>
-                                </div>
-                                <div>
-                                    <p><i className="fas fa-copyright mr-2"></i> ©2020 All rights reserved. Sản phẩm không phải là thuốc không có tác dụng thay thế thuốc chữa bệnh</p>
+
+                                <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                                    <p>© 2020-2025 Cao Ban Long Hà Thảo Mộc. All rights reserved.</p>
+                                    <p className="mt-2 text-gray-400">Sản phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.</p>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Zalo Button */}
-                    <a href="https://zalo.me/0969565415" className="fixed right-4 bottom-4 bg-green-500 text-white p-4 rounded-full shadow-lg"><i className="fab fa-whatsapp mr-2"></i> Chat Zalo</a>
+                    <a href="https://zalo.me/0969565415" className="fixed right-4 bottom-4 bg-[#0068ff] hover:bg-[#0054cc] text-white p-3 rounded-full shadow-lg z-50 transition-all duration-300 hover:scale-110 hover:shadow-xl">
+                        <img src="./images/zalo-icon.png" alt="Zalo" className="w-8 h-8" />
+                    </a>
 
                     {/* Success Popup */}
                     {showSuccessPopup && (
@@ -565,19 +696,28 @@
 
                     {/* Order Popup */}
                     {showOrderPopup && (
-                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                            <div className="bg-orange-100 p-6 rounded-lg shadow-lg max-w-lg w-full border-2 border-orange-600">
-                                <h2 className="text-2xl font-bold text-orange-600 text-center">ƯU ĐÃI HẤP DẪN</h2>
-                                <img src="./images/Cao ban long/offer.gif" alt="Ưu đãi" className="w-32 mx-auto my-4" loading="lazy" />
-                                <p className="text-red-600 text-xl text-center mt-2">GIÁ BÁN LẺ: 550.000 vnđ</p>
-                                <p className="text-red-600 font-bold text-2xl text-center">GIÁ CHỈ CÒN 199.000 vnđ</p>
-                                <p className="text-red-600 font-bold text-center">FREE SHIP TOÀN QUỐC</p>
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+                            <div className="bg-orange-50 p-6 rounded-lg shadow-xl max-w-lg w-full relative">
+                                <button onClick={() => setShowOrderPopup(false)} className="absolute -right-3 -top-3 bg-white w-8 h-8 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+                                    <i className="fas fa-times"></i>
+                                </button>
+                                <div className="text-center mb-6">
+                                    <h2 className="text-xl font-bold text-gray-800">HOÀN TẤT ĐẶT HÀNG</h2>
+                                    <div className="mt-2 inline-flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
+                                        <i className="fas fa-clock"></i>
+                                        <span>Kết thúc sau: {countdown}</span>
+                                    </div>
+                                </div>
+                                <div className="bg-red-50 p-3 rounded-lg mb-6 text-center">
+                                    <p className="text-gray-500 line-through text-sm">Giá gốc: 550.000₫</p>
+                                    <p className="text-red-600 font-bold text-xl">Giảm còn: 199.000₫</p>
+                                    <p className="text-green-600 text-sm font-medium mt-1">
+                                        <i className="fas fa-truck"></i> Miễn phí vận chuyển
+                                    </p>
+                                </div>
                                 <form onSubmit={handleFormSubmit} className="mt-6">
                                     <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Họ và tên" className="w-full p-3 mb-4 border rounded" required />
                                     <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Số điện thoại" className="w-full p-3 mb-4 border rounded" required />
-                                    <div className="text-center text-red-600 font-bold mb-4">
-                                        <i className="fas fa-clock mr-2"></i> Ưu đãi kết thúc trong: <span>{countdown}</span>
-                                    </div>
                                     <select name="province" value={formData.province} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
                                         <option value="">Tỉnh/Thành phố</option>
                                         {provinces.map(province => (
@@ -611,7 +751,13 @@
                                             <span className="ml-2">Liệu trình 2 tháng 4 hộp Cao Ban Long Hà Thảo Mộc 600k + MIỄN SHIP</span>
                                         </label>
                                     </div>
-                                    <button type="submit" className="w-full bg-red-600 text-white p-3 rounded-lg font-bold pulse">ĐẶT MUA NGAY</button>
+                                    <button 
+                                        type="submit" 
+                                        className="w-full bg-red-600 hover:bg-red-500 active:scale-95 active:bg-red-700 transform transition-all duration-150 text-white p-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2"
+                                    >
+                                        <i className="fas fa-shopping-cart"></i>
+                                        ĐẶT MUA NGAY
+                                    </button>
                                 </form>
                             </div>
                         </div>
