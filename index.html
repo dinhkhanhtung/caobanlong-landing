@@ -82,21 +82,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <!-- Facebook Pixel Code -->
+    <!-- Initialize Facebook Events -->
     <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID'); // Thay YOUR_PIXEL_ID bằng Pixel ID của bạn
-        fbq('track', 'PageView');
+        window.fbAsyncInit = function() {
+            if (typeof fbq !== 'undefined') {
+                fbq('init', '763747612790246');
+                fbq('track', 'PageView');
+            }
+        };
     </script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
@@ -278,6 +271,17 @@
             const handleFormSubmit = async (e) => {
                 e.preventDefault();
                 if (/^0\d{9}$/.test(formData.phone)) {
+                    // Track purchase event with correct value based on treatment
+                    const value = formData.treatment === '1_hop' ? 199000 :
+                                formData.treatment === '2_hop' ? 320000 : 600000;
+                    
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Purchase', {
+                            currency: 'VND',
+                            value: value,
+                            content_name: formData.treatment,
+                            content_type: 'product'
+                        });
                     // Track successful purchase
                     let value = 199000;
                     if (formData.treatment === '2_hop') value = 320000;
