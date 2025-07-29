@@ -30,20 +30,23 @@
 
     <!-- Meta Pixel Code -->
     <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '763747612790246');
         fbq('track', 'PageView');
     </script>
     <noscript>
         <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=763747612790246&ev=PageView&noscript=1"/>
+            src="https://www.facebook.com/tr?id=763747612790246&ev=PageView&noscript=1" />
     </noscript>
     <!-- End Meta Pixel Code -->
 
@@ -82,13 +85,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <!-- Initialize Facebook Events -->
+    <script>
+        window.fbAsyncInit = function () {
+            if (typeof fbq !== 'undefined') {
+                fbq('init', '763747612790246');
+                fbq('track', 'PageView');
+            }
+        };
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
     <style>
-        :root {
-            --primary-color: #4CAF50;
-            --primary-dark: #388E3C;
-            --primary-light: #81C784;
-            --accent-color: #4CAF50;
-        }
         :root {
             --primary-color: #4CAF50;
             --primary-dark: #388E3C;
@@ -182,8 +190,8 @@
             event.preventDefault();
             // Track purchase event
             fbq('track', 'Purchase', {
-                value: formData.treatment === '1_hop' ? 199000 : 
-                       formData.treatment === '2_hop' ? 320000 : 600000,
+                value: formData.treatment === '1_hop' ? 199000 :
+                    formData.treatment === '2_hop' ? 320000 : 600000,
                 currency: 'VND'
             });
             // Show success popup
@@ -268,8 +276,8 @@
                 if (/^0\d{9}$/.test(formData.phone)) {
                     // Track purchase event with correct value based on treatment
                     const value = formData.treatment === '1_hop' ? 199000 :
-                                formData.treatment === '2_hop' ? 320000 : 600000;
-                    
+                        formData.treatment === '2_hop' ? 320000 : 600000;
+
                     if (typeof fbq !== 'undefined') {
                         fbq('track', 'Purchase', {
                             currency: 'VND',
@@ -277,566 +285,566 @@
                             content_name: formData.treatment,
                             content_type: 'product'
                         });
-                    // Track successful purchase
-                    let value = 199000;
-                    if (formData.treatment === '2_hop') value = 320000;
-                    if (formData.treatment === '4_hop') value = 600000;
-                    
-                    fbq('track', 'Purchase', {
-                        value: value,
-                        currency: 'VND',
-                        content_name: 'Cao Ban Long Hà Thảo Mộc',
-                        content_type: 'product',
-                        content_ids: ['CBL' + formData.treatment],
-                        num_items: formData.treatment === '4_hop' ? 4 : (formData.treatment === '2_hop' ? 2 : 1)
-                    });
-                    try {
-                        // Replace this URL with your Google Apps Script Web App URL
-                        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL';
+                        // Track successful purchase
+                        let value = 199000;
+                        if (formData.treatment === '2_hop') value = 320000;
+                        if (formData.treatment === '4_hop') value = 600000;
 
-                        const response = await axios.post(GOOGLE_SCRIPT_URL, {
-                            ...formData,
-                            timestamp: new Date().toISOString()
+                        fbq('track', 'Purchase', {
+                            value: value,
+                            currency: 'VND',
+                            content_name: 'Cao Ban Long Hà Thảo Mộc',
+                            content_type: 'product',
+                            content_ids: ['CBL' + formData.treatment],
+                            num_items: formData.treatment === '4_hop' ? 4 : (formData.treatment === '2_hop' ? 2 : 1)
                         });
-
-                        if (response.data.result === 'success') {
-                            window.fbq('track', 'Lead', {
-                                content_name: 'Order Submission',
-                                value: formData.treatment === '1_hop' ? 199000 :
-                                    formData.treatment === '2_hop' ? 320000 : 600000,
-                                currency: 'VND'
-                            });
-                            setShowOrderPopup(false);
-                            setShowSuccessPopup(true);
-                            setTimeout(() => setShowSuccessPopup(false), 3000);
-
-                            // Reset form
-                            setFormData({
-                                name: '',
-                                phone: '',
-                                province: '',
-                                district: '',
-                                ward: '',
-                                address: '',
-                                treatment: '1_hop'
-                            });
-                        } else {
-                            throw new Error('Submission failed');
-                        }
-                    } catch (error) {
-                        console.error('Error submitting form:', error);
-                        alert('Có lỗi xảy ra khi gửi đơn hàng. Vui lòng thử lại sau.');
-                    }
-                } else {
-                    alert('Vui lòng nhập số điện thoại hợp lệ (10 chữ số, bắt đầu bằng 0).');
-                }
-            };
-
-            const handleInputChange = async (e) => {
-                const { name, value } = e.target;
-                setFormData({ ...formData, [name]: value });
-
-                if (name === 'province') {
-                    // Clear district and ward when province changes
-                    setFormData(prev => ({ ...prev, district: '', ward: '' }));
-                    setWards([]);
-
-                    if (value) {
                         try {
-                            const province = provinces.find(p => p.name === value);
-                            if (province) {
-                                const response = await axios.get(`https://provinces.open-api.vn/api/p/${province.code}?depth=2`);
-                                setDistricts(response.data.districts);
+                            // Replace this URL with your Google Apps Script Web App URL
+                            const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL';
+
+                            const response = await axios.post(GOOGLE_SCRIPT_URL, {
+                                ...formData,
+                                timestamp: new Date().toISOString()
+                            });
+
+                            if (response.data.result === 'success') {
+                                window.fbq('track', 'Lead', {
+                                    content_name: 'Order Submission',
+                                    value: formData.treatment === '1_hop' ? 199000 :
+                                        formData.treatment === '2_hop' ? 320000 : 600000,
+                                    currency: 'VND'
+                                });
+                                setShowOrderPopup(false);
+                                setShowSuccessPopup(true);
+                                setTimeout(() => setShowSuccessPopup(false), 3000);
+
+                                // Reset form
+                                setFormData({
+                                    name: '',
+                                    phone: '',
+                                    province: '',
+                                    district: '',
+                                    ward: '',
+                                    address: '',
+                                    treatment: '1_hop'
+                                });
+                            } else {
+                                throw new Error('Submission failed');
                             }
                         } catch (error) {
-                            console.error('Error fetching districts:', error);
+                            console.error('Error submitting form:', error);
+                            alert('Có lỗi xảy ra khi gửi đơn hàng. Vui lòng thử lại sau.');
                         }
                     } else {
-                        setDistricts([]);
+                        alert('Vui lòng nhập số điện thoại hợp lệ (10 chữ số, bắt đầu bằng 0).');
                     }
-                }
+                };
 
-                if (name === 'district') {
-                    // Clear ward when district changes
-                    setFormData(prev => ({ ...prev, ward: '' }));
+                const handleInputChange = async (e) => {
+                    const { name, value } = e.target;
+                    setFormData({ ...formData, [name]: value });
 
-                    if (value) {
-                        try {
-                            const district = districts.find(d => d.name === value);
-                            if (district) {
-                                const response = await axios.get(`https://provinces.open-api.vn/api/d/${district.code}?depth=2`);
-                                setWards(response.data.wards);
-                            }
-                        } catch (error) {
-                            console.error('Error fetching wards:', error);
-                        }
-                    } else {
+                    if (name === 'province') {
+                        // Clear district and ward when province changes
+                        setFormData(prev => ({ ...prev, district: '', ward: '' }));
                         setWards([]);
-                    }
-                }
-            };
 
-            return (
-                <div className="font-sans">
-                    {/* Section 1: Header and Product Gallery */}
-                    <section className="bg-gradient-to-b from-green-50 to-white py-6 md:py-10">
-                        <div className="container mx-auto px-3 md:px-4">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                                <div>
-                                    <div className="relative max-w-xl mx-auto">
-                                        <img
-                                            src={currentImage === 0 ? "./images/Cao ban long/caobanlong.jpg" : `./images/Cao ban long/caobanlong${currentImage}.jpg`}
-                                            alt="Cao Ban Long"
-                                            className="w-full rounded-lg shadow-lg aspect-square object-cover transition-opacity duration-500"
-                                            loading="lazy"
-                                        />
-                                        <div className="mt-4 grid grid-cols-7 gap-3">
+                        if (value) {
+                            try {
+                                const province = provinces.find(p => p.name === value);
+                                if (province) {
+                                    const response = await axios.get(`https://provinces.open-api.vn/api/p/${province.code}?depth=2`);
+                                    setDistricts(response.data.districts);
+                                }
+                            } catch (error) {
+                                console.error('Error fetching districts:', error);
+                            }
+                        } else {
+                            setDistricts([]);
+                        }
+                    }
+
+                    if (name === 'district') {
+                        // Clear ward when district changes
+                        setFormData(prev => ({ ...prev, ward: '' }));
+
+                        if (value) {
+                            try {
+                                const district = districts.find(d => d.name === value);
+                                if (district) {
+                                    const response = await axios.get(`https://provinces.open-api.vn/api/d/${district.code}?depth=2`);
+                                    setWards(response.data.wards);
+                                }
+                            } catch (error) {
+                                console.error('Error fetching wards:', error);
+                            }
+                        } else {
+                            setWards([]);
+                        }
+                    }
+                };
+
+                return (
+                    <div className="font-sans">
+                        {/* Section 1: Header and Product Gallery */}
+                        <section className="bg-gradient-to-b from-green-50 to-white py-6 md:py-10">
+                            <div className="container mx-auto px-3 md:px-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                                    <div>
+                                        <div className="relative max-w-xl mx-auto">
                                             <img
-                                                src="./images/Cao ban long/caobanlong.jpg"
+                                                src={currentImage === 0 ? "./images/Cao ban long/caobanlong.jpg" : `./images/Cao ban long/caobanlong${currentImage}.jpg`}
                                                 alt="Cao Ban Long"
-                                                className={`aspect-square rounded shadow object-cover cursor-pointer transition duration-300 ${currentImage === 0 ? 'ring-2 ring-orange-500' : 'hover:opacity-90'}`}
-                                                onClick={() => setCurrentImage(0)}
+                                                className="w-full rounded-lg shadow-lg aspect-square object-cover transition-opacity duration-500"
                                                 loading="lazy"
                                             />
-                                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                                            <div className="mt-4 grid grid-cols-7 gap-3">
                                                 <img
-                                                    key={i}
-                                                    src={`./images/Cao ban long/caobanlong${i}.jpg`}
-                                                    alt={`Cao Ban Long ${i}`}
-                                                    className={`aspect-square rounded shadow object-cover cursor-pointer transition duration-300 ${currentImage === i ? 'ring-2 ring-orange-500' : 'hover:opacity-90'}`}
-                                                    onClick={() => setCurrentImage(i)}
+                                                    src="./images/Cao ban long/caobanlong.jpg"
+                                                    alt="Cao Ban Long"
+                                                    className={`aspect-square rounded shadow object-cover cursor-pointer transition duration-300 ${currentImage === 0 ? 'ring-2 ring-orange-500' : 'hover:opacity-90'}`}
+                                                    onClick={() => setCurrentImage(0)}
                                                     loading="lazy"
                                                 />
-                                            ))}
+                                                {[1, 2, 3, 4, 5, 6].map((i) => (
+                                                    <img
+                                                        key={i}
+                                                        src={`./images/Cao ban long/caobanlong${i}.jpg`}
+                                                        alt={`Cao Ban Long ${i}`}
+                                                        className={`aspect-square rounded shadow object-cover cursor-pointer transition duration-300 ${currentImage === i ? 'ring-2 ring-orange-500' : 'hover:opacity-90'}`}
+                                                        onClick={() => setCurrentImage(i)}
+                                                        loading="lazy"
+                                                    />
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <h1 className="text-2xl font-bold text-gray-800">Sản phẩm CAO BAN LONG HÀ THẢO MỘC GIA TRUYỀN</h1>
-                                    <div className="mt-4 bg-orange-50 p-4 rounded-lg">
-                                        <div className="flex flex-wrap items-center gap-2 mb-2">
-                                            <div className="flex items-baseline gap-2 flex-wrap w-full">
-                                                <div className="flex items-baseline gap-2 flex-wrap">
-                                                    <span className="text-2xl md:text-3xl font-bold text-red-600 leading-none order-1">199.000₫</span>
-                                                    <span className="text-gray-500 line-through text-sm md:text-base order-2">550.000₫</span>
-                                                    <span className="text-red-600 text-xs md:text-sm font-semibold border border-red-600 rounded px-2 py-0.5 inline-block bg-red-50 order-3">-64%</span>
+                                    <div>
+                                        <h1 className="text-2xl font-bold text-gray-800">Sản phẩm CAO BAN LONG HÀ THẢO MỘC GIA TRUYỀN</h1>
+                                        <div className="mt-4 bg-orange-50 p-4 rounded-lg">
+                                            <div className="flex flex-wrap items-center gap-2 mb-2">
+                                                <div className="flex items-baseline gap-2 flex-wrap w-full">
+                                                    <div className="flex items-baseline gap-2 flex-wrap">
+                                                        <span className="text-2xl md:text-3xl font-bold text-red-600 leading-none order-1">199.000₫</span>
+                                                        <span className="text-gray-500 line-through text-sm md:text-base order-2">550.000₫</span>
+                                                        <span className="text-red-600 text-xs md:text-sm font-semibold border border-red-600 rounded px-2 py-0.5 inline-block bg-red-50 order-3">-64%</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="flex flex-wrap items-center gap-2 md:gap-4">
-                                            <div className="flex items-center gap-1 flex-shrink-0">
-                                                <span className="text-yellow-400 text-base md:text-lg">★★★★★</span>
-                                                <span className="text-red-500 font-medium">4.9/5</span>
-                                                <span className="text-gray-500 text-sm">(46,3K đánh giá)</span>
-                                            </div>
-                                            <div className="hidden md:block h-4 w-[1px] bg-gray-300"></div>
-                                            <div className="text-red-500 font-medium text-sm md:text-base">Đã bán 87,2K</div>
-                                        </div>
-                                    </div>
-                                    <button
-                                        onClick={handleOrderClick}
-                                        className="mt-6 bg-red-600 hover:bg-red-500 active:scale-95 active:bg-red-700 transform transition-all duration-150 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg w-full flex items-center justify-center gap-2 animate-pulse"
-                                    >
-                                        <i className="fas fa-shopping-cart"></i>
-                                        MUA NGAY - GIẢM GIÁ 64%
-                                    </button>
-                                    <div className="mt-6">
-                                        <h2 className="text-red-600 font-bold italic text-xl">ĐIỀU TRỊ DỨT ĐIỂM CÁC TÌNH TRẠNG:</h2>
-                                        <ul className="mt-4 space-y-2 text-lg text-gray-800 italic font-semibold">
-                                            <li><i className="fas fa-bone mr-2"></i> Đau nhức xương khớp, thoái hóa</li>
-                                            <li><i className="fas fa-tired mr-2"></i> Cơ thể suy nhược, gầy yếu</li>
-                                            <li><i className="fas fa-bone-break mr-2"></i> Thiếu hụt canxi, loãng xương</li>
-                                            <li><i className="fas fa-male mr-2"></i> Yếu sinh lý, di mộng tinh</li>
-                                            <li><i className="fas fa-bed mr-2"></i> Chóng mặt, thiếu máu, mất ngủ</li>
-                                        </ul>
-                                    </div>
-                                    <div className="mt-6 flex flex-wrap gap-4">
-                                        <p className="text-gray-700"><i className="fas fa-plane mr-2"></i> Miễn phí vận chuyển</p>
-                                        <p className="text-gray-700"><i className="fas fa-credit-card mr-2"></i> Thanh toán bảo mật</p>
-                                        <p className="text-gray-700"><i className="fas fa-undo mr-2"></i> Đổi trả dễ dàng</p>
-                                        <p className="text-gray-700"><i className="fab fa-tiktok mr-2"></i> Đội ngũ hỗ trợ TikTok</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Section 2: Product Introduction */}
-                    <section className="py-6 md:py-10 bg-white">
-                        <div className="container mx-auto px-3 md:px-4">
-                            <h2 className="text-xl md:text-2xl font-bold text-red-600 italic text-center leading-tight">CAO BAN LONG HÀ THẢO MỘC ĐƯỢC CHẾ BIẾN CÔNG PHU TỪ GẠC HƯƠU/NAI THIÊN NHIÊN</h2>
-                            <div className="max-w-3xl mx-auto mt-6">
-                                <img src="./images/Cao ban long/process.jpg" alt="Quy trình chế biến" className="w-full rounded-lg shadow-md" loading="lazy" />
-                            </div>
-                            <h3 className="text-xl font-bold text-center mt-6">SẢN PHẨM Đáp ứng tiêu chí</h3>
-                            <ul className="mt-4 space-y-2 text-lg text-gray-800">
-                                <li><i className="fas fa-ban mr-2"></i> Không thuê <span className="text-red-600 font-bold">Kols NGƯỜI NỔI TIẾNG</span> tăng giá bán sản phẩm</li>
-                                <li><i className="fas fa-book-medical mr-2"></i> Bài thuốc gia truyền nhiều đời</li>
-                                <li><i className="fas fa-clock mr-2"></i> <span className="text-red-600 font-bold">Thời gian cải thiện nhanh chóng</span></li>
-                                <li><i className="fas fa-shield-alt mr-2"></i> Không tác dụng phụ</li>
-                                <li><i className="fas fa-times-circle mr-2"></i> Không có chất cấm</li>
-                            </ul>
-                        </div>
-                    </section>
-
-                    {/* Section 3: Customer Reviews */}
-                    <section className="py-6 md:py-10 bg-orange-100">
-                        <div className="container mx-auto px-3 md:px-4">
-                            <h2 className="text-xl md:text-2xl font-bold text-white bg-orange-600 p-3 md:p-4 rounded-lg text-center">RẤT NHIỀU KHÁCH HÀNG TIN TƯỞNG SỬ DỤNG VÀ ĐÃ CÓ KẾT QUẢ RÕ RỆT</h2>
-                            <div className="mt-4 md:mt-6 space-y-3 md:space-y-4">
-                                <div className="bg-white p-3 md:p-4 rounded-lg shadow flex flex-col md:flex-row gap-3 md:gap-0">
-                                    <img src="./images/selected_avatars/customer1.jpg" alt="Anh Khưu Thuỳ Thái" className="w-16 h-16 rounded-full mr-4 object-cover" loading="lazy" />
-                                    <div>
-                                        <p className="font-bold">Anh Khưu Thuỳ Thái ở Hải Phòng chia sẻ:</p>
-                                        <p>Tôi bị đau nhức xương khớp và suy nhược cơ thể đã lâu, dùng nhiều loại thuốc không đỡ. Sau khi được giới thiệu về <span className="font-bold">CAO BAN LONG HÀ THẢO MỘC</span>, tôi đã dùng thử và thấy sức khỏe cải thiện rõ rệt, ăn ngon ngủ ngon hơn, xương khớp đỡ đau hẳn.</p>
-                                    </div>
-                                </div>
-                                <div className="bg-white p-4 rounded-lg shadow flex">
-                                    <img src="./images/selected_avatars/customer2.jpg" alt="Chị Thơm" className="w-16 h-16 rounded-full mr-4 object-cover" loading="lazy" />
-                                    <div>
-                                        <p className="font-bold">Chị Thơm từ thành phố Vĩnh Yên cho biết:</p>
-                                        <p>Mấy năm nay tôi thường xuyên mệt mỏi, khó ngủ và đau lưng gối. Đến khi dùng <span className="font-bold">CAO BAN LONG HÀ THẢO MỘC</span> thì chỉ sau 1 liệu trình, tôi thấy cơ thể khỏe mạnh hẳn, ngủ ngon và các cơn đau cũng giảm đi rất nhiều. Sẽ tiếp tục ủng hộ sản phẩm!</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Section 4: Offer & Order Form */}
-                    <section className="py-10 bg-gray-100">
-                        <div className="container mx-auto px-4">
-                            <h2 className="text-2xl font-bold text-orange-600 text-center">ƯU ĐÃI HẤP DẪN</h2>
-                            <div className="text-center my-4">
-                                <div className="text-4xl font-bold text-orange-600">{countdown}</div>
-                                <p className="text-gray-600">Thời gian còn lại</p>
-                            </div>
-                            <p className="text-red-600 text-xl text-center mt-2">GIÁ BÁN LẺ: 550.000 vnđ</p>
-                            <p className="text-red-600 font-bold text-2xl text-center">GIÁ CHỈ CÒN 199.000 vnđ</p>
-                            <p className="text-red-600 font-bold text-center">FREE SHIP TOÀN QUỐC</p>
-                            <form onSubmit={handleFormSubmit} className="mt-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
-                                <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Họ và tên" className="w-full p-3 mb-4 border rounded" required />
-                                <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Số điện thoại" className="w-full p-3 mb-4 border rounded" required />
-                                <select name="province" value={formData.province} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
-                                    <option value="">Tỉnh/Thành phố</option>
-                                    <option value="Vinh Phuc">Vĩnh Phúc</option>
-                                    <option value="Ha Noi">Hà Nội</option>
-                                    <option value="Ho Chi Minh">Hồ Chí Minh</option>
-                                </select>
-                                <select name="district" value={formData.district} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
-                                    <option value="">Quận/Huyện</option>
-                                    <option value="Song Lo">Sông Lô</option>
-                                </select>
-                                <select name="ward" value={formData.ward} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
-                                    <option value="">Phường/Xã</option>
-                                    <option value="Quang Yen">Quang Yên</option>
-                                </select>
-                                <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Số nhà, Thôn" className="w-full p-3 mb-4 border rounded" required />
-                                <div className="mb-4">
-                                    <label className="block mb-2">
-                                        <input type="radio" name="treatment" value="1_hop" checked={formData.treatment === '1_hop'} onChange={handleInputChange} />
-                                        <span className="ml-2">Liệu trình dùng thử 1 hộp Cao Ban Long Hà Thảo Mộc 199k + MIỄN SHIP</span>
-                                    </label>
-                                    <label className="block mb-2">
-                                        <input type="radio" name="treatment" value="2_hop" checked={formData.treatment === '2_hop'} onChange={handleInputChange} />
-                                        <span className="ml-2">Liệu trình 1 tháng 2 hộp Cao Ban Long Hà Thảo Mộc 320k + MIỄN SHIP</span>
-                                    </label>
-                                    <label className="block mb-2">
-                                        <input type="radio" name="treatment" value="4_hop" checked={formData.treatment === '4_hop'} onChange={handleInputChange} />
-                                        <span className="ml-2">Liệu trình 2 tháng 4 hộp Cao Ban Long Hà Thảo Mộc 600k + MIỄN SHIP</span>
-                                    </label>
-                                </div>
-                                <button type="submit" className="w-full bg-red-600 text-white p-3 rounded-lg font-bold pulse">ĐẶT MUA NGAY</button>
-                            </form>
-                        </div>
-                    </section>
-
-                    {/* Section 5: Comments */}
-                    <section className="py-10 bg-white">
-                        <div className="container mx-auto px-4">
-                            <div className="max-w-2xl mx-auto">
-                                <div className="flex items-center justify-between border-b border-gray-300 pb-4">
-                                    <h2 className="text-xl font-semibold text-[#050505]">Bình luận</h2>
-                                    <div className="flex items-center gap-2 text-[#65676B] text-sm">
-                                        <span>17.653 bình luận</span>
-                                        <i className="fas fa-cog"></i>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2 py-2 text-sm text-[#65676B] border-b border-gray-300">
-                                    <button className="font-semibold">Phù hợp nhất</button>
-                                    <i className="fas fa-chevron-down"></i>
-                                </div>
-                                <div className="mt-4 space-y-4">
-                                    <div className="flex gap-2">
-                                        <img src="./images/selected_avatars/customer3.jpg" alt="Mai Hương" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
-                                        <div className="flex-1">
-                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
-                                                <p className="font-semibold text-[#050505]">Mai Hương</p>
-                                                <p className="text-[#050505]">Cao Ban Long Hà Thảo Mộc qc trên mạng k biết có tốt k nên cũng đắn đo, nhưng khi quyết định mua và dùng thử thấy rất hài lòng vì sản phẩm uống có hiệu quả thật, đơn vị tư vấn cũng rất nhiệt tình tận tâm.</p>
-                                            </div>
-                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
-                                                <button className="font-semibold hover:underline">Thích</button>
-                                                <button className="font-semibold hover:underline">Phản hồi</button>
-                                                <span>56 phút</span>
-                                                <div className="flex items-center gap-1">
-                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
-                                                    <span>8</span>
+                                            <div className="flex flex-wrap items-center gap-2 md:gap-4">
+                                                <div className="flex items-center gap-1 flex-shrink-0">
+                                                    <span className="text-yellow-400 text-base md:text-lg">★★★★★</span>
+                                                    <span className="text-red-500 font-medium">4.9/5</span>
+                                                    <span className="text-gray-500 text-sm">(46,3K đánh giá)</span>
                                                 </div>
+                                                <div className="hidden md:block h-4 w-[1px] bg-gray-300"></div>
+                                                <div className="text-red-500 font-medium text-sm md:text-base">Đã bán 87,2K</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="flex gap-2 ml-12">
-                                        <img src="./images/selected_avatars/customer4.jpg" alt="Trịnh Đình Quang" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
-                                        <div className="flex-1">
-                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
-                                                <p className="font-semibold text-[#050505]">Trịnh Đình Quang</p>
-                                                <p className="text-[#050505]">Cao Ban Long Hà Thảo Mộc tôi thấy rất chất lượng, dễ uống mà mau hồi phục, ko mệt mỏi như dùng các sản phẩm khác.</p>
-                                            </div>
-                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
-                                                <button className="font-semibold hover:underline">Thích</button>
-                                                <button className="font-semibold hover:underline">Phản hồi</button>
-                                                <span>54 phút</span>
-                                                <div className="flex items-center gap-1">
-                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
-                                                    <span>6</span>
-                                                </div>
-                                            </div>
+                                        <button
+                                            onClick={handleOrderClick}
+                                            className="mt-6 bg-red-600 hover:bg-red-500 active:scale-95 active:bg-red-700 transform transition-all duration-150 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg w-full flex items-center justify-center gap-2 animate-pulse"
+                                        >
+                                            <i className="fas fa-shopping-cart"></i>
+                                            MUA NGAY - GIẢM GIÁ 64%
+                                        </button>
+                                        <div className="mt-6">
+                                            <h2 className="text-red-600 font-bold italic text-xl">ĐIỀU TRỊ DỨT ĐIỂM CÁC TÌNH TRẠNG:</h2>
+                                            <ul className="mt-4 space-y-2 text-lg text-gray-800 italic font-semibold">
+                                                <li><i className="fas fa-bone mr-2"></i> Đau nhức xương khớp, thoái hóa</li>
+                                                <li><i className="fas fa-tired mr-2"></i> Cơ thể suy nhược, gầy yếu</li>
+                                                <li><i className="fas fa-bone-break mr-2"></i> Thiếu hụt canxi, loãng xương</li>
+                                                <li><i className="fas fa-male mr-2"></i> Yếu sinh lý, di mộng tinh</li>
+                                                <li><i className="fas fa-bed mr-2"></i> Chóng mặt, thiếu máu, mất ngủ</li>
+                                            </ul>
                                         </div>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <img src="./images/selected_avatars/customer5.jpg" alt="Chuc Nguyen" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
-                                        <div className="flex-1">
-                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
-                                                <p className="font-semibold text-[#050505]">Chuc Nguyen</p>
-                                                <p className="text-[#050505]">Em bị suy nhược cơ thể, gầy yếu, ăn kém, khó chịu, muốn bồi bổ cơ thể mà còn đắn đo. Nhờ chị tư vấn cho em liệu trình Cao Ban Long Hà Thảo Mộc ạ.</p>
-                                            </div>
-                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
-                                                <button className="font-semibold hover:underline">Thích</button>
-                                                <button className="font-semibold hover:underline">Phản hồi</button>
-                                                <span>50 phút</span>
-                                                <div className="flex items-center gap-1">
-                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
-                                                    <span>2</span>
-                                                </div>
-                                            </div>
+                                        <div className="mt-6 flex flex-wrap gap-4">
+                                            <p className="text-gray-700"><i className="fas fa-plane mr-2"></i> Miễn phí vận chuyển</p>
+                                            <p className="text-gray-700"><i className="fas fa-credit-card mr-2"></i> Thanh toán bảo mật</p>
+                                            <p className="text-gray-700"><i className="fas fa-undo mr-2"></i> Đổi trả dễ dàng</p>
+                                            <p className="text-gray-700"><i className="fab fa-tiktok mr-2"></i> Đội ngũ hỗ trợ TikTok</p>
                                         </div>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <img src="./images/selected_avatars/customer6.jpg" alt="Hien Nguyen" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
-                                        <div className="flex-1">
-                                            <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
-                                                <p className="font-semibold text-[#050505]">Hien Nguyen</p>
-                                                <p className="text-[#050505]">Mình bị đau lưng, mỏi gối, thiếu máu, cơ thể hay mệt mỏi. Mới dùng Cao Ban Long Hà Thảo Mộc 3 ngày mà thấy đỡ hẳn, ngủ ngon hơn. Cảm ơn chị nhiều.</p>
-                                            </div>
-                                            <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
-                                                <button className="font-semibold hover:underline">Thích</button>
-                                                <button className="font-semibold hover:underline">Phản hồi</button>
-                                                <span>15 phút</span>
-                                                <div className="flex items-center gap-1">
-                                                    <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
-                                                    <span>2</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-[#65676B] mt-4">
-                                        <div className="w-2 h-2 bg-[#65676B] rounded-full animate-pulse"></div>
-                                        <span className="text-sm">Ai đó đang nhập bình luận...</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    {/* Section 6: Footer */}
-                    <section className="bg-gray-900 text-gray-300 py-12">
-                        <div className="container mx-auto px-4">
-                            <div className="max-w-6xl mx-auto">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                    <div>
-                                        <h3 className="text-white text-lg font-semibold mb-4">Liên Hệ</h3>
-                                        <ul className="space-y-3">
-                                            <li>
-                                                <a href="tel:0329169998" className="flex items-center gap-2 hover:text-white transition-colors">
-                                                    <i className="fas fa-phone"></i>
-                                                    <span>0329 169 998</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="mailto:truongthuyha758111@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors">
-                                                    <i className="fas fa-envelope"></i>
-                                                    <span>truongthuyha758111@gmail.com</span>
-                                                </a>
-                                            </li>
-                                            <li className="flex items-center gap-2">
-                                                <i className="fas fa-map-marker-alt"></i>
-                                                <span>Nho Quan, Ninh Bình</span>
-                                            </li>
-                                        </ul>
+                        {/* Section 2: Product Introduction */}
+                        <section className="py-6 md:py-10 bg-white">
+                            <div className="container mx-auto px-3 md:px-4">
+                                <h2 className="text-xl md:text-2xl font-bold text-red-600 italic text-center leading-tight">CAO BAN LONG HÀ THẢO MỘC ĐƯỢC CHẾ BIẾN CÔNG PHU TỪ GẠC HƯƠU/NAI THIÊN NHIÊN</h2>
+                                <div className="max-w-3xl mx-auto mt-6">
+                                    <img src="./images/Cao ban long/process.jpg" alt="Quy trình chế biến" className="w-full rounded-lg shadow-md" loading="lazy" />
+                                </div>
+                                <h3 className="text-xl font-bold text-center mt-6">SẢN PHẨM Đáp ứng tiêu chí</h3>
+                                <ul className="mt-4 space-y-2 text-lg text-gray-800">
+                                    <li><i className="fas fa-ban mr-2"></i> Không thuê <span className="text-red-600 font-bold">Kols NGƯỜI NỔI TIẾNG</span> tăng giá bán sản phẩm</li>
+                                    <li><i className="fas fa-book-medical mr-2"></i> Bài thuốc gia truyền nhiều đời</li>
+                                    <li><i className="fas fa-clock mr-2"></i> <span className="text-red-600 font-bold">Thời gian cải thiện nhanh chóng</span></li>
+                                    <li><i className="fas fa-shield-alt mr-2"></i> Không tác dụng phụ</li>
+                                    <li><i className="fas fa-times-circle mr-2"></i> Không có chất cấm</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        {/* Section 3: Customer Reviews */}
+                        <section className="py-6 md:py-10 bg-orange-100">
+                            <div className="container mx-auto px-3 md:px-4">
+                                <h2 className="text-xl md:text-2xl font-bold text-white bg-orange-600 p-3 md:p-4 rounded-lg text-center">RẤT NHIỀU KHÁCH HÀNG TIN TƯỞNG SỬ DỤNG VÀ ĐÃ CÓ KẾT QUẢ RÕ RỆT</h2>
+                                <div className="mt-4 md:mt-6 space-y-3 md:space-y-4">
+                                    <div className="bg-white p-3 md:p-4 rounded-lg shadow flex flex-col md:flex-row gap-3 md:gap-0">
+                                        <img src="./images/selected_avatars/customer1.jpg" alt="Anh Khưu Thuỳ Thái" className="w-16 h-16 rounded-full mr-4 object-cover" loading="lazy" />
+                                        <div>
+                                            <p className="font-bold">Anh Khưu Thuỳ Thái ở Hải Phòng chia sẻ:</p>
+                                            <p>Tôi bị đau nhức xương khớp và suy nhược cơ thể đã lâu, dùng nhiều loại thuốc không đỡ. Sau khi được giới thiệu về <span className="font-bold">CAO BAN LONG HÀ THẢO MỘC</span>, tôi đã dùng thử và thấy sức khỏe cải thiện rõ rệt, ăn ngon ngủ ngon hơn, xương khớp đỡ đau hẳn.</p>
+                                        </div>
                                     </div>
-
-                                    <div>
-                                        <h3 className="text-white text-lg font-semibold mb-4">Thông Tin</h3>
-                                        <ul className="space-y-3">
-                                            <li>
-                                                <button onClick={handleOrderClick} className="flex items-center gap-2 hover:text-white transition-colors w-full text-left">
-                                                    <i className="fas fa-truck"></i>
-                                                    <span>Chính sách vận chuyển</span>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button onClick={handleOrderClick} className="flex items-center gap-2 hover:text-white transition-colors w-full text-left">
-                                                    <i className="fas fa-undo"></i>
-                                                    <span>Chính sách đổi trả</span>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button onClick={handleOrderClick} className="flex items-center gap-2 hover:text-white transition-colors w-full text-left">
-                                                    <i className="fas fa-shield-alt"></i>
-                                                    <span>Chính sách bảo mật</span>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div>
-                                        <h3 className="text-white text-lg font-semibold mb-4">Đặt Hàng</h3>
-                                        <div className="space-y-4">
-                                            <button
-                                                onClick={handleOrderClick}
-                                                className="w-full bg-red-600 hover:bg-red-500 active:scale-95 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
-                                            >
-                                                <i className="fas fa-shopping-cart"></i>
-                                                Đặt Hàng Ngay
-                                            </button>
-                                            <a
-                                                href="tel:0329169998"
-                                                className="w-full bg-green-600 hover:bg-green-500 active:scale-95 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
-                                            >
-                                                <i className="fas fa-phone"></i>
-                                                Gọi Ngay
-                                            </a>
+                                    <div className="bg-white p-4 rounded-lg shadow flex">
+                                        <img src="./images/selected_avatars/customer2.jpg" alt="Chị Thơm" className="w-16 h-16 rounded-full mr-4 object-cover" loading="lazy" />
+                                        <div>
+                                            <p className="font-bold">Chị Thơm từ thành phố Vĩnh Yên cho biết:</p>
+                                            <p>Mấy năm nay tôi thường xuyên mệt mỏi, khó ngủ và đau lưng gối. Đến khi dùng <span className="font-bold">CAO BAN LONG HÀ THẢO MỘC</span> thì chỉ sau 1 liệu trình, tôi thấy cơ thể khỏe mạnh hẳn, ngủ ngon và các cơn đau cũng giảm đi rất nhiều. Sẽ tiếp tục ủng hộ sản phẩm!</p>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
-                                    <p>© 2025 Cao Ban Long Hà Thảo Mộc. All rights reserved.</p>
-                                    <p className="mt-2 text-gray-400">Sản phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.</p>
-                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    {/* Zalo Button */}
-                    <a 
-                        href="https://zalo.me/0329169998" 
-                        className="fixed right-4 bottom-20 text-white z-50 transition-all duration-300 hover:scale-110"
-                        onClick={() => {
-                            fbq('track', 'Contact', {
-                                content_category: 'Zalo',
-                                content_name: 'Zalo Click'
-                            });
-                        }}
-                    >
-                        <img src="./images/zalo-icon.png" alt="Zalo" className="w-12 h-12 drop-shadow-lg" />
-                    </a>
-
-                    {/* Messenger Button */}
-                    <a 
-                        href="https://m.me/hathaomoc.vn" 
-                        className="fixed right-4 bottom-4 text-white z-50 transition-all duration-300 hover:scale-110"
-                        onClick={() => {
-                            fbq('track', 'Contact', {
-                                content_category: 'Messenger',
-                                content_name: 'Messenger Click'
-                            });
-                        }}
-                    >
-                        <img src="./images/icons8-messenger-48.png" alt="Messenger" className="w-12 h-12 drop-shadow-lg" />
-                    </a>
-
-                    {/* Success Popup */}
-                    {showSuccessPopup && (
-                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                            <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
-                                <h2 className="text-2xl font-bold"><i className="fas fa-check-circle mr-2"></i> Đặt hàng thành công!</h2>
-                                <p className="mt-4">Cảm ơn quý khách đã đặt hàng. Đội ngũ nhân viên kinh doanh của chúng tôi sẽ liên lạc lại xác nhận trong thời gian sớm nhất!</p>
-                                <button onClick={() => setShowSuccessPopup(false)} className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg font-bold">Đóng</button>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Order Popup */}
-                    {showOrderPopup && (
-                        <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto flex items-center justify-center p-4">
-                            <div className="bg-orange-50 p-6 rounded-lg shadow-xl max-w-lg w-full relative my-8">
-                                <button onClick={() => setShowOrderPopup(false)} className="absolute -right-3 -top-3 bg-white w-8 h-8 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
-                                    <i className="fas fa-times"></i>
-                                </button>
-                                <div className="text-center mb-6">
-                                    <h2 className="text-xl font-bold text-gray-800">HOÀN TẤT ĐẶT HÀNG</h2>
-                                    <div className="mt-2 inline-flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
-                                        <i className="fas fa-clock"></i>
-                                        <span>Kết thúc sau: {countdown}</span>
-                                    </div>
+                        {/* Section 4: Offer & Order Form */}
+                        <section className="py-10 bg-gray-100">
+                            <div className="container mx-auto px-4">
+                                <h2 className="text-2xl font-bold text-orange-600 text-center">ƯU ĐÃI HẤP DẪN</h2>
+                                <div className="text-center my-4">
+                                    <div className="text-4xl font-bold text-orange-600">{countdown}</div>
+                                    <p className="text-gray-600">Thời gian còn lại</p>
                                 </div>
-                                <div className="bg-red-50 p-3 rounded-lg mb-6 text-center">
-                                    <p className="text-gray-500 line-through text-sm">Giá gốc: 550.000₫</p>
-                                    <p className="text-red-600 font-bold text-xl">Giảm còn: 199.000₫</p>
-                                    <p className="text-green-600 text-sm font-medium mt-1">
-                                        <i className="fas fa-truck"></i> Miễn phí vận chuyển
-                                    </p>
-                                </div>
-                                <form onSubmit={handleFormSubmit} className="mt-6">
+                                <p className="text-red-600 text-xl text-center mt-2">GIÁ BÁN LẺ: 550.000 vnđ</p>
+                                <p className="text-red-600 font-bold text-2xl text-center">GIÁ CHỈ CÒN 199.000 vnđ</p>
+                                <p className="text-red-600 font-bold text-center">FREE SHIP TOÀN QUỐC</p>
+                                <form onSubmit={handleFormSubmit} className="mt-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
                                     <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Họ và tên" className="w-full p-3 mb-4 border rounded" required />
                                     <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Số điện thoại" className="w-full p-3 mb-4 border rounded" required />
                                     <select name="province" value={formData.province} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
                                         <option value="">Tỉnh/Thành phố</option>
-                                        {provinces.map(province => (
-                                            <option key={province.code} value={province.name}>{province.name}</option>
-                                        ))}
+                                        <option value="Vinh Phuc">Vĩnh Phúc</option>
+                                        <option value="Ha Noi">Hà Nội</option>
+                                        <option value="Ho Chi Minh">Hồ Chí Minh</option>
                                     </select>
                                     <select name="district" value={formData.district} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
                                         <option value="">Quận/Huyện</option>
-                                        {districts.map(district => (
-                                            <option key={district.code} value={district.name}>{district.name}</option>
-                                        ))}
+                                        <option value="Song Lo">Sông Lô</option>
                                     </select>
                                     <select name="ward" value={formData.ward} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
                                         <option value="">Phường/Xã</option>
-                                        {wards.map(ward => (
-                                            <option key={ward.code} value={ward.name}>{ward.name}</option>
-                                        ))}
+                                        <option value="Quang Yen">Quang Yên</option>
                                     </select>
                                     <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Số nhà, Thôn" className="w-full p-3 mb-4 border rounded" required />
                                     <div className="mb-4">
-                                        <select
-                                            name="treatment"
-                                            value={formData.treatment}
-                                            onChange={handleInputChange}
-                                            className="w-full p-3 border rounded bg-white"
-                                        >
-                                            <option value="1_hop">Liệu trình dùng thử: 1 hộp - 199.000₫ (Miễn phí ship)</option>
-                                            <option value="2_hop">Liệu trình 1 tháng: 2 hộp - 320.000₫ (Miễn phí ship)</option>
-                                            <option value="4_hop">Liệu trình 2 tháng: 4 hộp - 600.000₫ (Miễn phí ship)</option>
-                                        </select>
+                                        <label className="block mb-2">
+                                            <input type="radio" name="treatment" value="1_hop" checked={formData.treatment === '1_hop'} onChange={handleInputChange} />
+                                            <span className="ml-2">Liệu trình dùng thử 1 hộp Cao Ban Long Hà Thảo Mộc 199k + MIỄN SHIP</span>
+                                        </label>
+                                        <label className="block mb-2">
+                                            <input type="radio" name="treatment" value="2_hop" checked={formData.treatment === '2_hop'} onChange={handleInputChange} />
+                                            <span className="ml-2">Liệu trình 1 tháng 2 hộp Cao Ban Long Hà Thảo Mộc 320k + MIỄN SHIP</span>
+                                        </label>
+                                        <label className="block mb-2">
+                                            <input type="radio" name="treatment" value="4_hop" checked={formData.treatment === '4_hop'} onChange={handleInputChange} />
+                                            <span className="ml-2">Liệu trình 2 tháng 4 hộp Cao Ban Long Hà Thảo Mộc 600k + MIỄN SHIP</span>
+                                        </label>
                                     </div>
-                                    <button
-                                        type="submit"
-                                        className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 active:scale-95 transform transition-all duration-150 text-white p-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 shadow-lg animate-pulse"
-                                    >
-                                        <i className="fas fa-shopping-cart"></i>
-                                        ĐẶT MUA NGAY - MIỄN PHÍ VẬN CHUYỂN
-                                    </button>
+                                    <button type="submit" className="w-full bg-red-600 text-white p-3 rounded-lg font-bold pulse">ĐẶT MUA NGAY</button>
                                 </form>
                             </div>
-                        </div>
-                    )}
-                </div>
-            );
-        }
+                        </section>
 
-        ReactDOM.render(<App />, document.getElementById('root'));
+                        {/* Section 5: Comments */}
+                        <section className="py-10 bg-white">
+                            <div className="container mx-auto px-4">
+                                <div className="max-w-2xl mx-auto">
+                                    <div className="flex items-center justify-between border-b border-gray-300 pb-4">
+                                        <h2 className="text-xl font-semibold text-[#050505]">Bình luận</h2>
+                                        <div className="flex items-center gap-2 text-[#65676B] text-sm">
+                                            <span>17.653 bình luận</span>
+                                            <i className="fas fa-cog"></i>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2 py-2 text-sm text-[#65676B] border-b border-gray-300">
+                                        <button className="font-semibold">Phù hợp nhất</button>
+                                        <i className="fas fa-chevron-down"></i>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex gap-2">
+                                            <img src="./images/selected_avatars/customer3.jpg" alt="Mai Hương" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                            <div className="flex-1">
+                                                <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                    <p className="font-semibold text-[#050505]">Mai Hương</p>
+                                                    <p className="text-[#050505]">Cao Ban Long Hà Thảo Mộc qc trên mạng k biết có tốt k nên cũng đắn đo, nhưng khi quyết định mua và dùng thử thấy rất hài lòng vì sản phẩm uống có hiệu quả thật, đơn vị tư vấn cũng rất nhiệt tình tận tâm.</p>
+                                                </div>
+                                                <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                    <button className="font-semibold hover:underline">Thích</button>
+                                                    <button className="font-semibold hover:underline">Phản hồi</button>
+                                                    <span>56 phút</span>
+                                                    <div className="flex items-center gap-1">
+                                                        <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                        <span>8</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-2 ml-12">
+                                            <img src="./images/selected_avatars/customer4.jpg" alt="Trịnh Đình Quang" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                            <div className="flex-1">
+                                                <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                    <p className="font-semibold text-[#050505]">Trịnh Đình Quang</p>
+                                                    <p className="text-[#050505]">Cao Ban Long Hà Thảo Mộc tôi thấy rất chất lượng, dễ uống mà mau hồi phục, ko mệt mỏi như dùng các sản phẩm khác.</p>
+                                                </div>
+                                                <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                    <button className="font-semibold hover:underline">Thích</button>
+                                                    <button className="font-semibold hover:underline">Phản hồi</button>
+                                                    <span>54 phút</span>
+                                                    <div className="flex items-center gap-1">
+                                                        <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                        <span>6</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <img src="./images/selected_avatars/customer5.jpg" alt="Chuc Nguyen" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                            <div className="flex-1">
+                                                <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                    <p className="font-semibold text-[#050505]">Chuc Nguyen</p>
+                                                    <p className="text-[#050505]">Em bị suy nhược cơ thể, gầy yếu, ăn kém, khó chịu, muốn bồi bổ cơ thể mà còn đắn đo. Nhờ chị tư vấn cho em liệu trình Cao Ban Long Hà Thảo Mộc ạ.</p>
+                                                </div>
+                                                <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                    <button className="font-semibold hover:underline">Thích</button>
+                                                    <button className="font-semibold hover:underline">Phản hồi</button>
+                                                    <span>50 phút</span>
+                                                    <div className="flex items-center gap-1">
+                                                        <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                        <span>2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <img src="./images/selected_avatars/customer6.jpg" alt="Hien Nguyen" className="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                                            <div className="flex-1">
+                                                <div className="bg-[#F0F2F5] px-3 py-2 rounded-2xl">
+                                                    <p className="font-semibold text-[#050505]">Hien Nguyen</p>
+                                                    <p className="text-[#050505]">Mình bị đau lưng, mỏi gối, thiếu máu, cơ thể hay mệt mỏi. Mới dùng Cao Ban Long Hà Thảo Mộc 3 ngày mà thấy đỡ hẳn, ngủ ngon hơn. Cảm ơn chị nhiều.</p>
+                                                </div>
+                                                <div className="flex items-center gap-3 mt-1 text-xs text-[#65676B]">
+                                                    <button className="font-semibold hover:underline">Thích</button>
+                                                    <button className="font-semibold hover:underline">Phản hồi</button>
+                                                    <span>15 phút</span>
+                                                    <div className="flex items-center gap-1">
+                                                        <i className="fas fa-thumbs-up text-white p-1 rounded-full bg-[#0866FF] text-[10px]"></i>
+                                                        <span>2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-[#65676B] mt-4">
+                                            <div className="w-2 h-2 bg-[#65676B] rounded-full animate-pulse"></div>
+                                            <span className="text-sm">Ai đó đang nhập bình luận...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Section 6: Footer */}
+                        <section className="bg-gray-900 text-gray-300 py-12">
+                            <div className="container mx-auto px-4">
+                                <div className="max-w-6xl mx-auto">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                        <div>
+                                            <h3 className="text-white text-lg font-semibold mb-4">Liên Hệ</h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <a href="tel:0329169998" className="flex items-center gap-2 hover:text-white transition-colors">
+                                                        <i className="fas fa-phone"></i>
+                                                        <span>0329 169 998</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="mailto:truongthuyha758111@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors">
+                                                        <i className="fas fa-envelope"></i>
+                                                        <span>truongthuyha758111@gmail.com</span>
+                                                    </a>
+                                                </li>
+                                                <li className="flex items-center gap-2">
+                                                    <i className="fas fa-map-marker-alt"></i>
+                                                    <span>Nho Quan, Ninh Bình</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-white text-lg font-semibold mb-4">Thông Tin</h3>
+                                            <ul className="space-y-3">
+                                                <li>
+                                                    <button onClick={handleOrderClick} className="flex items-center gap-2 hover:text-white transition-colors w-full text-left">
+                                                        <i className="fas fa-truck"></i>
+                                                        <span>Chính sách vận chuyển</span>
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button onClick={handleOrderClick} className="flex items-center gap-2 hover:text-white transition-colors w-full text-left">
+                                                        <i className="fas fa-undo"></i>
+                                                        <span>Chính sách đổi trả</span>
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button onClick={handleOrderClick} className="flex items-center gap-2 hover:text-white transition-colors w-full text-left">
+                                                        <i className="fas fa-shield-alt"></i>
+                                                        <span>Chính sách bảo mật</span>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-white text-lg font-semibold mb-4">Đặt Hàng</h3>
+                                            <div className="space-y-4">
+                                                <button
+                                                    onClick={handleOrderClick}
+                                                    className="w-full bg-red-600 hover:bg-red-500 active:scale-95 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                                                >
+                                                    <i className="fas fa-shopping-cart"></i>
+                                                    Đặt Hàng Ngay
+                                                </button>
+                                                <a
+                                                    href="tel:0329169998"
+                                                    className="w-full bg-green-600 hover:bg-green-500 active:scale-95 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                                                >
+                                                    <i className="fas fa-phone"></i>
+                                                    Gọi Ngay
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                                        <p>© 2025 Cao Ban Long Hà Thảo Mộc. All rights reserved.</p>
+                                        <p className="mt-2 text-gray-400">Sản phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa bệnh.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Zalo Button */}
+                        <a
+                            href="https://zalo.me/0329169998"
+                            className="fixed right-4 bottom-20 text-white z-50 transition-all duration-300 hover:scale-110"
+                            onClick={() => {
+                                fbq('track', 'Contact', {
+                                    content_category: 'Zalo',
+                                    content_name: 'Zalo Click'
+                                });
+                            }}
+                        >
+                            <img src="./images/zalo-icon.png" alt="Zalo" className="w-12 h-12 drop-shadow-lg" />
+                        </a>
+
+                        {/* Messenger Button */}
+                        <a
+                            href="https://m.me/hathaomoc.vn"
+                            className="fixed right-4 bottom-4 text-white z-50 transition-all duration-300 hover:scale-110"
+                            onClick={() => {
+                                fbq('track', 'Contact', {
+                                    content_category: 'Messenger',
+                                    content_name: 'Messenger Click'
+                                });
+                            }}
+                        >
+                            <img src="./images/icons8-messenger-48.png" alt="Messenger" className="w-12 h-12 drop-shadow-lg" />
+                        </a>
+
+                        {/* Success Popup */}
+                        {showSuccessPopup && (
+                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                                <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+                                    <h2 className="text-2xl font-bold"><i className="fas fa-check-circle mr-2"></i> Đặt hàng thành công!</h2>
+                                    <p className="mt-4">Cảm ơn quý khách đã đặt hàng. Đội ngũ nhân viên kinh doanh của chúng tôi sẽ liên lạc lại xác nhận trong thời gian sớm nhất!</p>
+                                    <button onClick={() => setShowSuccessPopup(false)} className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg font-bold">Đóng</button>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Order Popup */}
+                        {showOrderPopup && (
+                            <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto flex items-center justify-center p-4">
+                                <div className="bg-orange-50 p-6 rounded-lg shadow-xl max-w-lg w-full relative my-8">
+                                    <button onClick={() => setShowOrderPopup(false)} className="absolute -right-3 -top-3 bg-white w-8 h-8 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                    <div className="text-center mb-6">
+                                        <h2 className="text-xl font-bold text-gray-800">HOÀN TẤT ĐẶT HÀNG</h2>
+                                        <div className="mt-2 inline-flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
+                                            <i className="fas fa-clock"></i>
+                                            <span>Kết thúc sau: {countdown}</span>
+                                        </div>
+                                    </div>
+                                    <div className="bg-red-50 p-3 rounded-lg mb-6 text-center">
+                                        <p className="text-gray-500 line-through text-sm">Giá gốc: 550.000₫</p>
+                                        <p className="text-red-600 font-bold text-xl">Giảm còn: 199.000₫</p>
+                                        <p className="text-green-600 text-sm font-medium mt-1">
+                                            <i className="fas fa-truck"></i> Miễn phí vận chuyển
+                                        </p>
+                                    </div>
+                                    <form onSubmit={handleFormSubmit} className="mt-6">
+                                        <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Họ và tên" className="w-full p-3 mb-4 border rounded" required />
+                                        <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Số điện thoại" className="w-full p-3 mb-4 border rounded" required />
+                                        <select name="province" value={formData.province} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                            <option value="">Tỉnh/Thành phố</option>
+                                            {provinces.map(province => (
+                                                <option key={province.code} value={province.name}>{province.name}</option>
+                                            ))}
+                                        </select>
+                                        <select name="district" value={formData.district} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                            <option value="">Quận/Huyện</option>
+                                            {districts.map(district => (
+                                                <option key={district.code} value={district.name}>{district.name}</option>
+                                            ))}
+                                        </select>
+                                        <select name="ward" value={formData.ward} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                            <option value="">Phường/Xã</option>
+                                            {wards.map(ward => (
+                                                <option key={ward.code} value={ward.name}>{ward.name}</option>
+                                            ))}
+                                        </select>
+                                        <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Số nhà, Thôn" className="w-full p-3 mb-4 border rounded" required />
+                                        <div className="mb-4">
+                                            <select
+                                                name="treatment"
+                                                value={formData.treatment}
+                                                onChange={handleInputChange}
+                                                className="w-full p-3 border rounded bg-white"
+                                            >
+                                                <option value="1_hop">Liệu trình dùng thử: 1 hộp - 199.000₫ (Miễn phí ship)</option>
+                                                <option value="2_hop">Liệu trình 1 tháng: 2 hộp - 320.000₫ (Miễn phí ship)</option>
+                                                <option value="4_hop">Liệu trình 2 tháng: 4 hộp - 600.000₫ (Miễn phí ship)</option>
+                                            </select>
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 active:scale-95 transform transition-all duration-150 text-white p-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 shadow-lg animate-pulse"
+                                        >
+                                            <i className="fas fa-shopping-cart"></i>
+                                            ĐẶT MUA NGAY - MIỄN PHÍ VẬN CHUYỂN
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                );
+            }
+
+            ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 
