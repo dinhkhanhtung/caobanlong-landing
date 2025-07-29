@@ -743,18 +743,16 @@
                                     </select>
                                     <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Số nhà, Thôn" className="w-full p-3 mb-4 border rounded" required />
                                     <div className="mb-4">
-                                        <label className="block mb-2">
-                                            <input type="radio" name="treatment" value="1_hop" checked={formData.treatment === '1_hop'} onChange={handleInputChange} />
-                                            <span className="ml-2">Liệu trình dùng thử 1 hộp Cao Ban Long Hà Thảo Mộc 199k + MIỄN SHIP</span>
-                                        </label>
-                                        <label className="block mb-2">
-                                            <input type="radio" name="treatment" value="2_hop" checked={formData.treatment === '2_hop'} onChange={handleInputChange} />
-                                            <span className="ml-2">Liệu trình 1 tháng 2 hộp Cao Ban Long Hà Thảo Mộc 320k + MIỄN SHIP</span>
-                                        </label>
-                                        <label className="block mb-2">
-                                            <input type="radio" name="treatment" value="4_hop" checked={formData.treatment === '4_hop'} onChange={handleInputChange} />
-                                            <span className="ml-2">Liệu trình 2 tháng 4 hộp Cao Ban Long Hà Thảo Mộc 600k + MIỄN SHIP</span>
-                                        </label>
+                                        <select 
+                                            name="treatment" 
+                                            value={formData.treatment} 
+                                            onChange={handleInputChange} 
+                                            className="w-full p-3 border rounded bg-white"
+                                        >
+                                            <option value="1_hop">Liệu trình dùng thử: 1 hộp - 199.000₫ (Miễn phí ship)</option>
+                                            <option value="2_hop">Liệu trình 1 tháng: 2 hộp - 320.000₫ (Miễn phí ship)</option>
+                                            <option value="4_hop">Liệu trình 2 tháng: 4 hộp - 600.000₫ (Miễn phí ship)</option>
+                                        </select>
                                     </div>
                                     <button
                                         type="submit"
