@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAO BAN LONG HÀ THẢO MỘC - Bồi Bổ, Cường Tráng, Mạnh Gân Cốt</title>
+    <meta name="keywords"
+        content="Cao Ban Long, Hà Thảo Mộc, bổ sung canxi, mạnh gân cốt, bồi bổ cơ thể, tăng cường sinh lực, chống suy nhược">
+    <meta name="description"
+        content="Cao Ban Long Hà Thảo Mộc - Sản phẩm quý từ thiên nhiên giúp bồi bổ sức khỏe toàn diện, mạnh gân cốt. Đặt hàng ngay để nhận ưu đãi 199.000đ + MIỄN SHIP!">
+    <meta property="og:title" content="CAO BAN LONG HÀ THẢO MỘC - Bồi Bổ, Cường Tráng, Mạnh Gân Cốt">
+    <meta property="og:description"
+        content="Cao Ban Long Hà Thảo Mộc - Sản phẩm quý từ thiên nhiên giúp bồi bổ sức khỏe toàn diện, mạnh gân cốt. Đặt hàng ngay để nhận ưu đãi 199.000đ + MIỄN SHIP!">
+    <meta property="og:image" content="./images/Cao ban long/caobanlong.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://dinhkhanhtung.github.io/caobanlong-landing">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Cao Ban Long Hà Thảo Mộc",
+      "image": "./images/Cao ban long/caobanlong.jpg",
+      "description": "Sản phẩm Cao Ban Long Hà Thảo Mộc giúp bồi bổ sức khỏe toàn diện, mạnh gân cốt",
+      "brand": {
+        "@type": "Brand",
+        "name": "Hà Thảo Mộc"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://dinhkhanhtung.github.io/caobanlong-landing",
+        "priceCurrency": "VND",
+        "price": "199000",
+        "priceValidUntil": "2025-12-31",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "46300"
+      }
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID'); // Thay YOUR_PIXEL_ID bằng Pixel ID của bạn
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
+    <style>
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes flash {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .flash {
+            animation: flash 1.5s infinite;
+        }
+
+        .typing-indicator {
+            animation: typing 2.5s steps(3, end) infinite;
+            display: inline-block;
+        }
+
+        @keyframes typing {
+
+            0%,
+            100% {
+                content: ".";
+            }
+
+            33% {
+                content: "..";
+            }
+
+            66% {
+                content: "...";
+            }
+        }
+
+        .comment-typing {
+            opacity: 0.7;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function App() {
+            const [showSuccessPopup, setShowSuccessPopup] = React.useState(false);
+            const [showOrderPopup, setShowOrderPopup] = React.useState(false);
+            const [provinces, setProvinces] = React.useState([]);
+            const [districts, setDistricts] = React.useState([]);
+            const [wards, setWards] = React.useState([]);
+            const [countdown, setCountdown] = React.useState('23:59:59');
+            const [currentImage, setCurrentImage] = React.useState(0);
+            const [formData, setFormData] = React.useState({
+                name: '',
+                phone: '',
+                province: '',
+                district: '',
+                ward: '',
+                address: '',
+                treatment: '1_hop'
+            });
+
+            // Auto slide effect
+            React.useEffect(() => {
+                const timer = setInterval(() => {
+                    setCurrentImage((prev) => (prev + 1) % 7);
+                }, 3000);
+                return () => clearInterval(timer);
+            }, []);
+
+            React.useEffect(() => {
+                // Fetch provinces when component mounts
+                const fetchProvinces = async () => {
+                    try {
+                        const response = await axios.get('https://provinces.open-api.vn/api/p/');
+                        setProvinces(response.data);
+                    } catch (error) {
+                        console.error('Error fetching provinces:', error);
+                    }
+                };
+                fetchProvinces();
+
+                // Start countdown timer
+                const startTimer = () => {
+                    const now = new Date();
+                    const endOfDay = new Date(now);
+                    endOfDay.setHours(23, 59, 59);
+
+                    const updateTimer = () => {
+                        const now = new Date();
+                        const diff = endOfDay - now;
+
+                        if (diff > 0) {
+                            const hours = Math.floor(diff / (1000 * 60 * 60));
+                            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                            setCountdown(`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
+                        } else {
+                            // Reset for next day
+                            endOfDay.setDate(endOfDay.getDate() + 1);
+                        }
+                    };
+
+                    updateTimer();
+                    const timer = setInterval(updateTimer, 1000);
+                    return () => clearInterval(timer);
+                };
+
+                return startTimer();
+            }, []);
+
+            const handleOrderClick = () => {
+                setShowOrderPopup(true);
+                window.fbq('track', 'ViewContent', { content_name: 'Order Form' });
+            };
+
+            const handleFormSubmit = async (e) => {
+                e.preventDefault();
+                if (/^0\d{9}$/.test(formData.phone)) {
+                    try {
+                        // Replace this URL with your Google Apps Script Web App URL
+                        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL';
+
+                        const response = await axios.post(GOOGLE_SCRIPT_URL, {
+                            ...formData,
+                            timestamp: new Date().toISOString()
+                        });
+
+                        if (response.data.result === 'success') {
+                            window.fbq('track', 'Lead', {
+                                content_name: 'Order Submission',
+                                value: formData.treatment === '1_hop' ? 199000 :
+                                    formData.treatment === '2_hop' ? 320000 : 600000,
+                                currency: 'VND'
+                            });
+                            setShowOrderPopup(false);
+                            setShowSuccessPopup(true);
+                            setTimeout(() => setShowSuccessPopup(false), 3000);
+
+                            // Reset form
+                            setFormData({
+                                name: '',
+                                phone: '',
+                                province: '',
+                                district: '',
+                                ward: '',
+                                address: '',
+                                treatment: '1_hop'
+                            });
+                        } else {
+                            throw new Error('Submission failed');
+                        }
+                    } catch (error) {
+                        console.error('Error submitting form:', error);
+                        alert('Có lỗi xảy ra khi gửi đơn hàng. Vui lòng thử lại sau.');
+                    }
+                } else {
+                    alert('Vui lòng nhập số điện thoại hợp lệ (10 chữ số, bắt đầu bằng 0).');
+                }
+            };
+
+            const handleInputChange = async (e) => {
+                const { name, value } = e.target;
+                setFormData({ ...formData, [name]: value });
+
+                if (name === 'province') {
+                    // Clear district and ward when province changes
+                    setFormData(prev => ({ ...prev, district: '', ward: '' }));
+                    setWards([]);
+
+                    if (value) {
+                        try {
+                            const province = provinces.find(p => p.name === value);
+                            if (province) {
+                                const response = await axios.get(`https://provinces.open-api.vn/api/p/${province.code}?depth=2`);
+                                setDistricts(response.data.districts);
+                            }
+                        } catch (error) {
+                            console.error('Error fetching districts:', error);
+                        }
+                    } else {
+                        setDistricts([]);
+                    }
+                }
+
+                if (name === 'district') {
+                    // Clear ward when district changes
+                    setFormData(prev => ({ ...prev, ward: '' }));
+
+                    if (value) {
+                        try {
+                            const district = districts.find(d => d.name === value);
+                            if (district) {
+                                const response = await axios.get(`https://provinces.open-api.vn/api/d/${district.code}?depth=2`);
+                                setWards(response.data.wards);
+                            }
+                        } catch (error) {
+                            console.error('Error fetching wards:', error);
+                        }
+                    } else {
+                        setWards([]);
+                    }
+                }
+            };
+
+            return (
+                <div className="font-sans">
+                    {/* Section 1: Header and Product Gallery */}
+                    <section className="bg-gray-100 py-10">
+                        <div className="container mx-auto px-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <div className="relative max-w-xl mx-auto">
+                                        <img
+                                            src={currentImage === 0 ? "./images/Cao ban long/caobanlong.jpg" : `./images/Cao ban long/caobanlong${currentImage}.jpg`}
+                                            alt="Cao Ban Long"
+                                            className="w-full rounded-lg shadow-lg aspect-square object-cover transition-opacity duration-500"
+                                            loading="lazy"
+                                        />
+                                        <div className="mt-4 grid grid-cols-7 gap-3">
+                                            <img
+                                                src="./images/Cao ban long/caobanlong.jpg"
+                                                alt="Cao Ban Long"
+                                                className={`aspect-square rounded shadow object-cover cursor-pointer transition duration-300 ${currentImage === 0 ? 'ring-2 ring-orange-500' : 'hover:opacity-90'}`}
+                                                onClick={() => setCurrentImage(0)}
+                                                loading="lazy"
+                                            />
+                                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                                                <img
+                                                    key={i}
+                                                    src={`./images/Cao ban long/caobanlong${i}.jpg`}
+                                                    alt={`Cao Ban Long ${i}`}
+                                                    className={`aspect-square rounded shadow object-cover cursor-pointer transition duration-300 ${currentImage === i ? 'ring-2 ring-orange-500' : 'hover:opacity-90'}`}
+                                                    onClick={() => setCurrentImage(i)}
+                                                    loading="lazy"
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h1 className="text-3xl font-bold text-orange-600">Sản phẩm CAO BAN LONG HÀ THẢO MỘC GIA TRUYỀN</h1>
+                                    <p className="text-gray-500 line-through text-xl mt-2">550,000đ</p>
+                                    <p className="text-red-600 font-bold text-2xl">Tiết kiệm tới 34%</p>
+                                    <p className="text-gray-700 text-lg">Đánh giá: 4.9/5 (46.3k lượt đánh giá)</p>
+                                    <p className="text-gray-700 text-lg">Đã bán 87.2K sản phẩm</p>
+                                    <button onClick={handleOrderClick} className="mt-4 bg-red-600 text-white px-6 py-3 rounded-lg pulse text-lg font-bold">ĐẶT HÀNG NGAY</button>
+                                    <div className="mt-6">
+                                        <h2 className="text-red-600 font-bold italic text-xl">ĐIỀU TRỊ DỨT ĐIỂM CÁC TÌNH TRẠNG:</h2>
+                                        <ul className="mt-4 space-y-2 text-lg text-gray-800 italic font-semibold">
+                                            <li><i className="fas fa-bone mr-2"></i> Đau nhức xương khớp, thoái hóa</li>
+                                            <li><i className="fas fa-tired mr-2"></i> Cơ thể suy nhược, gầy yếu</li>
+                                            <li><i className="fas fa-bone-break mr-2"></i> Thiếu hụt canxi, loãng xương</li>
+                                            <li><i className="fas fa-male mr-2"></i> Yếu sinh lý, di mộng tinh</li>
+                                            <li><i className="fas fa-bed mr-2"></i> Chóng mặt, thiếu máu, mất ngủ</li>
+                                        </ul>
+                                    </div>
+                                    <div className="mt-6 flex flex-wrap gap-4">
+                                        <p className="text-gray-700"><i className="fas fa-plane mr-2"></i> Miễn phí vận chuyển</p>
+                                        <p className="text-gray-700"><i className="fas fa-credit-card mr-2"></i> Thanh toán bảo mật</p>
+                                        <p className="text-gray-700"><i className="fas fa-undo mr-2"></i> Đổi trả dễ dàng</p>
+                                        <p className="text-gray-700"><i className="fab fa-tiktok mr-2"></i> Đội ngũ hỗ trợ TikTok</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Section 2: Product Introduction */}
+                    <section className="py-10 bg-white">
+                        <div className="container mx-auto px-4">
+                            <h2 className="text-2xl font-bold text-red-600 italic text-center">CAO BAN LONG HÀ THẢO MỘC ĐƯỢC CHẾ BIẾN CÔNG PHU TỪ GẠC HƯƠU/NAI THIÊN NHIÊN</h2>
+                            <img src="./images/Cao ban long/process.jpg" alt="Quy trình chế biến" className="w-full rounded-lg mt-6" loading="lazy" />
+                            <h3 className="text-xl font-bold text-center mt-6">SẢN PHẨM Đáp ứng tiêu chí</h3>
+                            <ul className="mt-4 space-y-2 text-lg text-gray-800">
+                                <li><i className="fas fa-ban mr-2"></i> Không thuê <span className="text-red-600 font-bold">Kols NGƯỜI NỔI TIẾNG</span> tăng giá bán sản phẩm</li>
+                                <li><i className="fas fa-book-medical mr-2"></i> Bài thuốc gia truyền nhiều đời</li>
+                                <li><i className="fas fa-clock mr-2"></i> <span className="text-red-600 font-bold">Thời gian cải thiện nhanh chóng</span></li>
+                                <li><i className="fas fa-shield-alt mr-2"></i> Không tác dụng phụ</li>
+                                <li><i className="fas fa-times-circle mr-2"></i> Không có chất cấm</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    {/* Section 3: Customer Reviews */}
+                    <section className="py-10 bg-orange-100">
+                        <div className="container mx-auto px-4">
+                            <h2 className="text-2xl font-bold text-white bg-orange-600 p-4 rounded-lg text-center">RẤT NHIỀU KHÁCH HÀNG TIN TƯỞNG SỬ DỤNG VÀ ĐÃ CÓ KẾT QUẢ RÕ RỆT</h2>
+                            <div className="mt-6 space-y-4">
+                                <div className="bg-white p-4 rounded-lg shadow flex">
+                                    <img src="./images/selected_avatars/customer1.jpg" alt="Anh Khưu Thuỳ Thái" className="w-16 h-16 rounded-full mr-4 object-cover" loading="lazy" />
+                                    <div>
+                                        <p className="font-bold">Anh Khưu Thuỳ Thái ở Hải Phòng chia sẻ:</p>
+                                        <p>Tôi bị đau nhức xương khớp và suy nhược cơ thể đã lâu, dùng nhiều loại thuốc không đỡ. Sau khi được giới thiệu về <span className="font-bold">CAO BAN LONG HÀ THẢO MỘC</span>, tôi đã dùng thử và thấy sức khỏe cải thiện rõ rệt, ăn ngon ngủ ngon hơn, xương khớp đỡ đau hẳn.</p>
+                                    </div>
+                                </div>
+                                <div className="bg-white p-4 rounded-lg shadow flex">
+                                    <img src="./images/selected_avatars/customer2.jpg" alt="Chị Thơm" className="w-16 h-16 rounded-full mr-4 object-cover" loading="lazy" />
+                                    <div>
+                                        <p className="font-bold">Chị Thơm từ thành phố Vĩnh Yên cho biết:</p>
+                                        <p>Mấy năm nay tôi thường xuyên mệt mỏi, khó ngủ và đau lưng gối. Đến khi dùng <span className="font-bold">CAO BAN LONG HÀ THẢO MỘC</span> thì chỉ sau 1 liệu trình, tôi thấy cơ thể khỏe mạnh hẳn, ngủ ngon và các cơn đau cũng giảm đi rất nhiều. Sẽ tiếp tục ủng hộ sản phẩm!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Section 4: Offer & Order Form */}
+                    <section className="py-10 bg-gray-100">
+                        <div className="container mx-auto px-4">
+                            <h2 className="text-2xl font-bold text-orange-600 text-center">ƯU ĐÃI HẤP DẪN</h2>
+                            <div className="text-center my-4">
+                                <div className="text-4xl font-bold text-orange-600">{countdown}</div>
+                                <p className="text-gray-600">Thời gian còn lại</p>
+                            </div>
+                            <p className="text-red-600 text-xl text-center mt-2">GIÁ BÁN LẺ: 550.000 vnđ</p>
+                            <p className="text-red-600 font-bold text-2xl text-center">GIÁ CHỈ CÒN 199.000 vnđ</p>
+                            <p className="text-red-600 font-bold text-center">FREE SHIP TOÀN QUỐC</p>
+                            <form onSubmit={handleFormSubmit} className="mt-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
+                                <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Họ và tên" className="w-full p-3 mb-4 border rounded" required />
+                                <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Số điện thoại" className="w-full p-3 mb-4 border rounded" required />
+                                <select name="province" value={formData.province} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                    <option value="">Tỉnh/Thành phố</option>
+                                    <option value="Vinh Phuc">Vĩnh Phúc</option>
+                                    <option value="Ha Noi">Hà Nội</option>
+                                    <option value="Ho Chi Minh">Hồ Chí Minh</option>
+                                </select>
+                                <select name="district" value={formData.district} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                    <option value="">Quận/Huyện</option>
+                                    <option value="Song Lo">Sông Lô</option>
+                                </select>
+                                <select name="ward" value={formData.ward} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                    <option value="">Phường/Xã</option>
+                                    <option value="Quang Yen">Quang Yên</option>
+                                </select>
+                                <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Số nhà, Thôn" className="w-full p-3 mb-4 border rounded" required />
+                                <div className="mb-4">
+                                    <label className="block mb-2">
+                                        <input type="radio" name="treatment" value="1_hop" checked={formData.treatment === '1_hop'} onChange={handleInputChange} />
+                                        <span className="ml-2">Liệu trình dùng thử 1 hộp Cao Ban Long Hà Thảo Mộc 199k + MIỄN SHIP</span>
+                                    </label>
+                                    <label className="block mb-2">
+                                        <input type="radio" name="treatment" value="2_hop" checked={formData.treatment === '2_hop'} onChange={handleInputChange} />
+                                        <span className="ml-2">Liệu trình 1 tháng 2 hộp Cao Ban Long Hà Thảo Mộc 320k + MIỄN SHIP</span>
+                                    </label>
+                                    <label className="block mb-2">
+                                        <input type="radio" name="treatment" value="4_hop" checked={formData.treatment === '4_hop'} onChange={handleInputChange} />
+                                        <span className="ml-2">Liệu trình 2 tháng 4 hộp Cao Ban Long Hà Thảo Mộc 600k + MIỄN SHIP</span>
+                                    </label>
+                                </div>
+                                <button type="submit" className="w-full bg-red-600 text-white p-3 rounded-lg font-bold pulse">ĐẶT MUA NGAY</button>
+                            </form>
+                        </div>
+                    </section>
+
+                    {/* Section 5: Comments */}
+                    <section className="py-10 bg-white">
+                        <div className="container mx-auto px-4">
+                            <h2 className="text-2xl font-bold">Tất cả bình luận (17.653)</h2>
+                            <div className="mt-4 flex justify-between">
+                                <p>Sắp xếp theo: Hàng đầu <i className="fas fa-chevron-down ml-2"></i></p>
+                                <button onClick={handleOrderClick} className="bg-red-600 text-white px-6 py-3 rounded-lg pulse font-bold">ĐẶT HÀNG NGAY</button>
+                            </div>
+                            <div className="mt-6 space-y-4">
+                                <div className="bg-gray-100 p-4 rounded-lg flex">
+                                    <img src="./images/selected_avatars/customer3.jpg" alt="Mai Hương" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
+                                    <div>
+                                        <p className="font-bold">Mai Hương</p>
+                                        <p>Cao Ban Long Hà Thảo Mộc qc trên mạng k biết có tốt k nên cũng đắn đo, nhưng khi quyết định mua và dùng thử thấy rất hài lòng vì sản phẩm uống có hiệu quả thật, đơn vị tư vấn cũng rất nhiệt tình tận tâm.</p>
+                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 8 lượt thích • 56 phút trước</p>
+                                    </div>
+                                </div>
+                                <div className="bg-gray-100 p-4 rounded-lg flex">
+                                    <img src="./images/selected_avatars/customer4.jpg" alt="Trịnh Đình Quang" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
+                                    <div>
+                                        <p className="font-bold">Trịnh Đình Quang</p>
+                                        <p>Cao Ban Long Hà Thảo Mộc tôi thấy rất chất lượng, dễ uống mà mau hồi phục, ko mệt mỏi như dùng các sản phẩm khác.</p>
+                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 6 lượt thích • 54 phút trước</p>
+                                    </div>
+                                </div>
+                                <div className="bg-gray-100 p-4 rounded-lg flex">
+                                    <img src="./images/selected_avatars/customer5.jpg" alt="Chuc Nguyen" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
+                                    <div>
+                                        <p className="font-bold">Chuc Nguyen</p>
+                                        <p>Em bị suy nhược cơ thể, gầy yếu, ăn kém, khó chịu, muốn bồi bổ cơ thể mà còn đắn đo. Nhờ chị tư vấn cho em liệu trình Cao Ban Long Hà Thảo Mộc ạ.</p>
+                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 2 lượt thích • 50 phút trước</p>
+                                    </div>
+                                </div>
+                                <div className="bg-gray-100 p-4 rounded-lg flex">
+                                    <img src="./images/selected_avatars/customer6.jpg" alt="Hien Nguyen" className="w-12 h-12 rounded-full mr-4 object-cover" loading="lazy" />
+                                    <div>
+                                        <p className="font-bold">Hien Nguyen</p>
+                                        <p>Mình bị đau lưng, mỏi gối, thiếu máu, cơ thể hay mệt mỏi. Mới dùng Cao Ban Long Hà Thảo Mộc 3 ngày mà thấy đỡ hẳn, ngủ ngon hơn. Cảm ơn chị nhiều.</p>
+                                        <p className="text-sm text-gray-600"><i className="fas fa-thumbs-up mr-2"></i> 2 lượt thích • 15 phút trước</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-600 comment-typing"><i className="fas fa-comment-dots mr-2"></i> Ai đó đang nhập bình luận<span className="typing-indicator">...</span></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Section 6: Footer */}
+                    <section className="bg-gray-800 text-white py-10">
+                        <div className="container mx-auto px-4">
+                            <div className="flex flex-col md:flex-row justify-between items-center">
+                                <a href="tel:0969565415" className="bg-red-600 text-white px-6 py-3 rounded-lg flash font-bold mb-4 md:mb-0"><i className="fas fa-phone mr-2"></i> ☎️ 0969.565.415</a>
+                                <button onClick={handleOrderClick} className="bg-red-600 text-white px-6 py-3 rounded-lg pulse font-bold">ĐẶT HÀNG NGAY</button>
+                            </div>
+                            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <p><i className="fas fa-phone mr-2"></i> Hotline: 0969.565.415</p>
+                                    <p><i className="fas fa-envelope mr-2"></i> Email: dongy.trieuphuong@gmail.com</p>
+                                    <p><i className="fas fa-map-marker-alt mr-2"></i> Address: Quang Yên, Sông Lô, Vĩnh Phúc</p>
+                                </div>
+                                <div>
+                                    <p><i className="fas fa-headset mr-2"></i> CUSTOMER SERVICE</p>
+                                    <p><i className="fas fa-truck mr-2"></i> Returns & Shipping Policy</p>
+                                    <p><i className="fas fa-file-alt mr-2"></i> Terms of Use</p>
+                                    <p><i className="fas fa-user-shield mr-2"></i> Privacy Policy</p>
+                                    <p><i className="fas fa-envelope mr-2"></i> Contact Us</p>
+                                </div>
+                                <div>
+                                    <p><i className="fas fa-copyright mr-2"></i> ©2020 All rights reserved. Sản phẩm không phải là thuốc không có tác dụng thay thế thuốc chữa bệnh</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Zalo Button */}
+                    <a href="https://zalo.me/0969565415" className="fixed right-4 bottom-4 bg-green-500 text-white p-4 rounded-full shadow-lg"><i className="fab fa-whatsapp mr-2"></i> Chat Zalo</a>
+
+                    {/* Success Popup */}
+                    {showSuccessPopup && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                            <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+                                <h2 className="text-2xl font-bold"><i className="fas fa-check-circle mr-2"></i> Đặt hàng thành công!</h2>
+                                <p className="mt-4">Cảm ơn quý khách đã đặt hàng. Đội ngũ nhân viên kinh doanh của chúng tôi sẽ liên lạc lại xác nhận trong thời gian sớm nhất!</p>
+                                <button onClick={() => setShowSuccessPopup(false)} className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg font-bold">Đóng</button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Order Popup */}
+                    {showOrderPopup && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                            <div className="bg-orange-100 p-6 rounded-lg shadow-lg max-w-lg w-full border-2 border-orange-600">
+                                <h2 className="text-2xl font-bold text-orange-600 text-center">ƯU ĐÃI HẤP DẪN</h2>
+                                <img src="./images/Cao ban long/offer.gif" alt="Ưu đãi" className="w-32 mx-auto my-4" loading="lazy" />
+                                <p className="text-red-600 text-xl text-center mt-2">GIÁ BÁN LẺ: 550.000 vnđ</p>
+                                <p className="text-red-600 font-bold text-2xl text-center">GIÁ CHỈ CÒN 199.000 vnđ</p>
+                                <p className="text-red-600 font-bold text-center">FREE SHIP TOÀN QUỐC</p>
+                                <form onSubmit={handleFormSubmit} className="mt-6">
+                                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Họ và tên" className="w-full p-3 mb-4 border rounded" required />
+                                    <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Số điện thoại" className="w-full p-3 mb-4 border rounded" required />
+                                    <div className="text-center text-red-600 font-bold mb-4">
+                                        <i className="fas fa-clock mr-2"></i> Ưu đãi kết thúc trong: <span>{countdown}</span>
+                                    </div>
+                                    <select name="province" value={formData.province} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                        <option value="">Tỉnh/Thành phố</option>
+                                        {provinces.map(province => (
+                                            <option key={province.code} value={province.name}>{province.name}</option>
+                                        ))}
+                                    </select>
+                                    <select name="district" value={formData.district} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                        <option value="">Quận/Huyện</option>
+                                        {districts.map(district => (
+                                            <option key={district.code} value={district.name}>{district.name}</option>
+                                        ))}
+                                    </select>
+                                    <select name="ward" value={formData.ward} onChange={handleInputChange} className="w-full p-3 mb-4 border rounded" required>
+                                        <option value="">Phường/Xã</option>
+                                        {wards.map(ward => (
+                                            <option key={ward.code} value={ward.name}>{ward.name}</option>
+                                        ))}
+                                    </select>
+                                    <input type="text" name="address" value={formData.address} onChange={handleInputChange} placeholder="Số nhà, Thôn" className="w-full p-3 mb-4 border rounded" required />
+                                    <div className="mb-4">
+                                        <label className="block mb-2">
+                                            <input type="radio" name="treatment" value="1_hop" checked={formData.treatment === '1_hop'} onChange={handleInputChange} />
+                                            <span className="ml-2">Liệu trình dùng thử 1 hộp Cao Ban Long Hà Thảo Mộc 199k + MIỄN SHIP</span>
+                                        </label>
+                                        <label className="block mb-2">
+                                            <input type="radio" name="treatment" value="2_hop" checked={formData.treatment === '2_hop'} onChange={handleInputChange} />
+                                            <span className="ml-2">Liệu trình 1 tháng 2 hộp Cao Ban Long Hà Thảo Mộc 320k + MIỄN SHIP</span>
+                                        </label>
+                                        <label className="block mb-2">
+                                            <input type="radio" name="treatment" value="4_hop" checked={formData.treatment === '4_hop'} onChange={handleInputChange} />
+                                            <span className="ml-2">Liệu trình 2 tháng 4 hộp Cao Ban Long Hà Thảo Mộc 600k + MIỄN SHIP</span>
+                                        </label>
+                                    </div>
+                                    <button type="submit" className="w-full bg-red-600 text-white p-3 rounded-lg font-bold pulse">ĐẶT MUA NGAY</button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>
