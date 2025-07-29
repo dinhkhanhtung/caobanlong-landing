@@ -266,10 +266,10 @@
                 window.fbq('track', 'ViewContent', { content_name: 'Order Form' });
             };
 
-            const handleFormSubmit = async (e) => {
+            const handleFormSubmit = (e) => {
                 e.preventDefault();
                 if (/^0\d{9}$/.test(formData.phone)) {
-                    // Track successful purchase
+                    // Track successful purchase event
                     let value = 199000;
                     if (formData.treatment === '2_hop') value = 320000;
                     if (formData.treatment === '4_hop') value = 600000;
@@ -282,43 +282,42 @@
                         content_ids: ['CBL' + formData.treatment],
                         num_items: formData.treatment === '4_hop' ? 4 : (formData.treatment === '2_hop' ? 2 : 1)
                     });
-                    try {
-                        // Replace this URL with your Google Apps Script Web App URL
-                        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL';
 
-                        const response = await axios.post(GOOGLE_SCRIPT_URL, {
-                            ...formData,
-                            timestamp: new Date().toISOString()
-                        });
+                    // Chuẩn bị nội dung tin nhắn
+                    const treatmentText = {
+                        '1_hop': '1 hộp - 199.000₫',
+                        '2_hop': '2 hộp - 320.000₫',
+                        '4_hop': '4 hộp - 600.000₫'
+                    };
 
-                        if (response.data.result === 'success') {
-                            window.fbq('track', 'Lead', {
-                                content_name: 'Order Submission',
-                                value: formData.treatment === '1_hop' ? 199000 :
-                                    formData.treatment === '2_hop' ? 320000 : 600000,
-                                currency: 'VND'
-                            });
-                            setShowOrderPopup(false);
-                            setShowSuccessPopup(true);
-                            setTimeout(() => setShowSuccessPopup(false), 3000);
+                    const message = `🛒 ĐƠN HÀNG MỚI
+Họ tên: ${formData.name}
+SĐT: ${formData.phone}
+Địa chỉ: ${formData.address}, ${formData.ward}, ${formData.district}, ${formData.province}
+Sản phẩm: Cao Ban Long Hà Thảo Mộc
+Số lượng: ${treatmentText[formData.treatment]}`;
 
-                            // Reset form
-                            setFormData({
-                                name: '',
-                                phone: '',
-                                province: '',
-                                district: '',
-                                ward: '',
-                                address: '',
-                                treatment: '1_hop'
-                            });
-                        } else {
-                            throw new Error('Submission failed');
-                        }
-                    } catch (error) {
-                        console.error('Error submitting form:', error);
-                        alert('Có lỗi xảy ra khi gửi đơn hàng. Vui lòng thử lại sau.');
-                    }
+                    // Mã hóa tin nhắn để dùng trong URL
+                    const encodedMessage = encodeURIComponent(message);
+                    
+                    // Mở Messenger với tin nhắn đã soạn sẵn
+                    window.open(`https://m.me/hathaomoc.vn?text=${encodedMessage}`, '_blank');
+
+                    // Đóng popup và hiện thông báo thành công
+                    setShowOrderPopup(false);
+                    setShowSuccessPopup(true);
+                    setTimeout(() => setShowSuccessPopup(false), 3000);
+
+                    // Reset form
+                    setFormData({
+                        name: '',
+                        phone: '',
+                        province: '',
+                        district: '',
+                        ward: '',
+                        address: '',
+                        treatment: '1_hop'
+                    });
                 } else {
                     alert('Vui lòng nhập số điện thoại hợp lệ (10 chữ số, bắt đầu bằng 0).');
                 }
